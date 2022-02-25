@@ -23,15 +23,15 @@ public:
         glUseProgram(ID);
     }
 
-    void setUniform(const char* name, bool value) const {
-        int location = glGetUniformLocation(ID, name);
+    void setUniform(const std::string& name, bool value) const {
+        int location = glGetUniformLocation(ID, name.c_str());
         if (location != -1) {
             glUniform1i(location, value);
         } else printf("Invalid uniform name.\n");
     }
 
-    void setUniform(const char* name, int value) const {
-        int location = glGetUniformLocation(ID, name);
+    void setUniform(const std::string& name, int value) const {
+        int location = glGetUniformLocation(ID, name.c_str());
         if (location != -1) {
             glUniform1i(location, value);
         } else printf("Invalid uniform name.\n");
@@ -69,15 +69,15 @@ public:
     void setUniform(const std::string& name, const glm::mat4& mat4) const {
         int location = glGetUniformLocation(ID, name.c_str());
         if (location != -1) {
-            glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(mat4));
+            glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(mat4));
         } else printf("Invalid uniform name.\n");
     }
 
     void setUniform(const std::string& name, const Texture& texture, int textureUnit = 0) const {
         int location = glGetUniformLocation(ID, name.c_str());
         if (location != -1) {
-            glUniform1i(location, textureUnit);
             glActiveTexture(GL_TEXTURE0 + textureUnit);
+            glUniform1i(location, textureUnit);
             glBindTexture(GL_TEXTURE_2D, texture.getID());
         } else printf("Invalid uniform name.\n");
     }

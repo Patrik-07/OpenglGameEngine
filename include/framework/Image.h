@@ -8,8 +8,8 @@ class Image {
     int colorDepth;
     unsigned char* data;
 public:
-    explicit Image(const char* imagePath) {
-        data = stbi_load(imagePath, &width, &height, &colorDepth, 0);
+    explicit Image(const std::string& imagePath) {
+        data = stbi_load(imagePath.c_str(), &width, &height, &colorDepth, 0);
         if (data == nullptr) {
             printf("Couldn't load image");
             exit(-1);

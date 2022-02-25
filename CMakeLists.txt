@@ -7,24 +7,26 @@ include_directories(include)
 link_directories(lib)
 
 add_executable(Imgui
-        src/main.cpp
+    src/main.cpp
 
-        include/imgui/imconfig.h
-        include/imgui/imgui.cpp
-        include/imgui/imgui.h
-        include/imgui/imgui_demo.cpp
-        include/imgui/imgui_draw.cpp
-        include/imgui/imgui_internal.h
-        include/imgui/imgui_tables.cpp
-        include/imgui/imgui_widgets.cpp
-        include/imgui/imstb_rectpack.h
-        include/imgui/imstb_textedit.h
-        include/imgui/imstb_truetype.h
+    include/imgui/imconfig.h
+    include/imgui/imgui.cpp
+    include/imgui/imgui.h
+    include/imgui/imgui_demo.cpp
+    include/imgui/imgui_draw.cpp
+    include/imgui/imgui_internal.h
+    include/imgui/imgui_tables.cpp
+    include/imgui/imgui_widgets.cpp
+    include/imgui/imstb_rectpack.h
+    include/imgui/imstb_textedit.h
+    include/imgui/imstb_truetype.h
+    include/imgui/sdl_opengl3/imgui_impl_opengl3.cpp
+    include/imgui/sdl_opengl3/imgui_impl_opengl3.h
+    include/imgui/sdl_opengl3/imgui_impl_opengl3_loader.h
+    include/imgui/sdl_opengl3/imgui_impl_sdl.cpp
+    include/imgui/sdl_opengl3/imgui_impl_sdl.h
 
-        include/imgui/sdl_opengl3/imgui_impl_opengl3.cpp
-        include/imgui/sdl_opengl3/imgui_impl_opengl3.h
-        include/imgui/sdl_opengl3/imgui_impl_opengl3_loader.h
-        include/imgui/sdl_opengl3/imgui_impl_sdl.cpp
-        include/imgui/sdl_opengl3/imgui_impl_sdl.h
-        include/stb/stb_image.h)
-target_link_libraries(Imgui mingw32 opengl32 glew32 SDL2main SDL2 assimp-vc143-mtd)
+    include/stb/stb_image.h
+        src/main2.cpp include/framework/Camera.h include/framework/Grid.h)
+
+target_link_libraries(Imgui mingw32 opengl32 glew32 SDL2main SDL2 assimp)

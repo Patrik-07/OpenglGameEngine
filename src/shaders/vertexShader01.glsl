@@ -5,8 +5,15 @@ layout (location = 2) in vec2 vertexTextureCoord;
 
 out vec2 texCoord;
 
-void main()
-{
-    gl_Position = vec4(vertexPositionCoord, 1.0);
+struct MVP {
+    mat4 model;
+    mat4 view;
+    mat4 projection;
+};
+
+uniform MVP mvp;
+
+void main() {
+    gl_Position = mvp.projection * mvp.view * mvp.model * vec4(vertexPositionCoord, 1.0);
     texCoord = vertexTextureCoord;
 }
