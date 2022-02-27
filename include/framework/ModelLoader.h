@@ -10,8 +10,12 @@ class ModelLoader {
     static std::vector<Texture> loadedTextures;
 public:
     static Model load(const std::string& modelPath) {
+        meshes.clear();
+        directory = "";
+        loadedTextures.clear();
+
         Assimp::Importer importer;
-        const aiScene* scene = importer.ReadFile(modelPath, aiProcess_Triangulate | aiProcess_FlipUVs);
+        const aiScene* scene = importer.ReadFile(modelPath, aiProcessPreset_TargetRealtime_Fast);
 
         directory = modelPath.substr(0, modelPath.find_last_of('\\'));
         processNode(scene->mRootNode, scene);
@@ -73,7 +77,10 @@ private:
         material->Get(AI_MATKEY_SHADING_MODEL, illumModel);
 
         std::vector<Texture> diffuseMaps = processTexturesByType(material, aiTextureType_DIFFUSE, DIFFUSE);
+        std::vector<Texture> specularMaps = processTexturesByType(material, aiTextureType_SPECULAR, SPECULAR);
+
         textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+        textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 //        std::vector<Texture> specularMaps = processTexturesByType(material, aiTextureType_SPECULAR, "specularMap");
 //        std::vector<Texture> ambientMaps = processTexturesByType(material, aiTextureType_AMBIENT, "ambientMap");
 

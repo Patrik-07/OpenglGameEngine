@@ -27,8 +27,12 @@ static int height = 720;
 #include "Model.h"
 #include "ModelLoader.h"
 
+#include "IScene.h"
+#include "SceneObject.h"
 #include "Camera.h"
 #include "Grid.h"
+#include "Scene.h"
+
 
 void setupOpenGL() {
     glewExperimental = GL_TRUE;
@@ -61,15 +65,22 @@ void setupSDL(SDL_Window*& window, SDL_GLContext& context) {
 }
 
 void setupImGui(SDL_Window* window, SDL_GLContext context) {
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-
-    ImGui::StyleColorsDark();
-
-    ImGui_ImplSDL2_InitForOpenGL(window, context);
-    ImGui_ImplOpenGL3_Init("#version 330 core");
+//    IMGUI_CHECKVERSION();
+//    ImGui::CreateContext();
+//    ImGuiIO& io = ImGui::GetIO(); (void)io;
+//    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+//    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+//    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+//
+//    ImGui::StyleColorsDark();
+//
+//    ImGuiStyle& style = ImGui::GetStyle();
+//    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+//    {
+//        style.WindowRounding = 0.0f;
+//        style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+//    }
+//
+//    ImGui_ImplSDL2_InitForOpenGL(window, context);
+//    ImGui_ImplOpenGL3_Init("#version 330 core");
 }

@@ -47,22 +47,17 @@ public:
     }
 
     void draw(ShaderProgram& shaderProgram) {
+        if (!textures.empty())
+            shaderProgram.setUniform("enableTexture", true);
+        else shaderProgram.setUniform("enableTexture", false);
         for (int i = 0; i < textures.size(); i++) {
             glActiveTexture(GL_TEXTURE0 + i);
             TextureType type = textures[i].getType();
-
-            int location = glGetUniformLocation(textures[i].getID(), "material.diffuseMap");
-            glUniform1i(location, i);
-            glBindTexture(GL_TEXTURE_2D, textures[i].getID());
-//            switch (type) {
-//                case DIFFUSE:
-//                    shaderProgram.setUniform("material.diffuseMap", textures[i], i);
-//                    break;
-//                case SPECULAR:
-//                case AMBIENT:
-//                default:
-//                    break;
-//            }
+            switch (type) {
+                case DIFFUSE: shaderProgram.setUniform("material.diffuseMap", textures[i] , i); break;
+                case SPECULAR: shaderProgram.setUniform("material.specularMap", textures[i] , i); break;
+                case AMBIENT: shaderProgram.setUniform("material.ambientMap", textures[i] , i); break;
+            }
         }
         glActiveTexture(GL_TEXTURE0);
 

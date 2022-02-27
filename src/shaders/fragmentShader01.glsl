@@ -6,10 +6,11 @@ out vec4 FragColor;
 
 struct Material {
     sampler2D diffuseMap;
+    sampler2D ambientMap;
+    sampler2D specularMap;
 };
-
-uniform bool enableTexture;
 uniform Material material;
+uniform bool enableTexture;
 
 void main() {
     if (enableTexture) {

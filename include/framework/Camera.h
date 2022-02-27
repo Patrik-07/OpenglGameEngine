@@ -5,35 +5,35 @@ enum Direction {
 };
 
 class Camera {
-    glm::vec3 position;
     glm::vec3 target;
     glm::vec3 up;
 
     float pitch, yaw;
 
-    float movementSpeed;
+    IScene* scene;
 public:
-    Camera() {
+    glm::vec3 position;
+    Camera(IScene* scene) : scene(scene) {
         position = glm::vec3(0.0f, 2.0f, 5.0f);
         target = glm::vec3(0.0f, 0.0f, -1.0f);
         up = glm::vec3(0.0f, 1.0f, 0.0f);
 
         yaw = -90.0f;
         pitch = 0.0f;
-        movementSpeed = 0.3f;
     }
 
-    void setMovementSpeed(float speed) {
-        movementSpeed = speed;
-    }
-
-    void move(Direction direction, float additionalSpeed) {
+    void move(Direction direction, float speed) {
         switch (direction) {
-            case FORTH: position += (movementSpeed + additionalSpeed) * target; break;
-            case BACK: position -= (movementSpeed + additionalSpeed) * target; break;
-            case RIGHT: position += glm::normalize(glm::cross(target, up)) * (movementSpeed + additionalSpeed); break;
-            case LEFT: position -= glm::normalize(glm::cross(target, up)) * (movementSpeed + additionalSpeed); break;
+            case FORTH: position += speed * target; break;
+            case BACK: position -= speed * target; break;
+            case RIGHT: position += glm::normalize(glm::cross(target, up)) * speed; break;
+            case LEFT: position -= glm::normalize(glm::cross(target, up)) * speed; break;
         }
+        scene->refresh();
+    }
+
+    void refresh() {
+        scene->refresh();
     }
 
     void rotate(float x, float y) {
@@ -48,6 +48,7 @@ public:
         target.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
         target = glm::normalize(target);
+        scene->refresh();
     }
 
     glm::vec3 getPosition() {
