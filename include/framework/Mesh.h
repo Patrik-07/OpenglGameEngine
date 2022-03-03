@@ -54,9 +54,9 @@ public:
             glActiveTexture(GL_TEXTURE0 + i);
             TextureType type = textures[i].getType();
             switch (type) {
-                case DIFFUSE: shaderProgram.setUniform("material.diffuseMap", textures[i] , i); break;
-                case SPECULAR: shaderProgram.setUniform("material.specularMap", textures[i] , i); break;
-                case AMBIENT: shaderProgram.setUniform("material.ambientMap", textures[i] , i); break;
+                case DIFFUSE: shaderProgram.setUniform("material.diffuseMap", textures[i].getID() , i); break;
+                case SPECULAR: shaderProgram.setUniform("material.specularMap", textures[i].getID() , i); break;
+                case AMBIENT: shaderProgram.setUniform("material.ambientMap", textures[i].getID() , i); break;
             }
         }
         glActiveTexture(GL_TEXTURE0);

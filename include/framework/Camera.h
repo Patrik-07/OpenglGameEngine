@@ -10,16 +10,16 @@ class Camera {
 
     float pitch, yaw;
 
-    IScene* scene;
+    IScene& scene;
 public:
     glm::vec3 position;
-    Camera(IScene* scene) : scene(scene) {
-        position = glm::vec3(0.0f, 2.0f, 5.0f);
-        target = glm::vec3(0.0f, 0.0f, -1.0f);
+    Camera(IScene& scene) : scene(scene) {
+        position = glm::vec3(15.0f, 10.0f, 15.0f);
+        target = glm::vec3(-0.55f, -0.43f, -0.7f);
         up = glm::vec3(0.0f, 1.0f, 0.0f);
 
-        yaw = -90.0f;
-        pitch = 0.0f;
+        yaw = -127.5f;
+        pitch = -25.5f;
     }
 
     void move(Direction direction, float speed) {
@@ -29,11 +29,11 @@ public:
             case RIGHT: position += glm::normalize(glm::cross(target, up)) * speed; break;
             case LEFT: position -= glm::normalize(glm::cross(target, up)) * speed; break;
         }
-        scene->refresh();
+        scene.refresh();
     }
 
     void refresh() {
-        scene->refresh();
+        scene.refresh();
     }
 
     void rotate(float x, float y) {
@@ -48,7 +48,7 @@ public:
         target.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
         target = glm::normalize(target);
-        scene->refresh();
+        scene.refresh();
     }
 
     glm::vec3 getPosition() {
@@ -60,6 +60,6 @@ public:
     }
 
     glm::mat4 getProjectionMatrix() {
-        return glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 1000.0f);
+        return glm::perspective(glm::radians(45.0f), (float)scene.width / (float)scene.height, 0.1f, 1000.0f);
     }
 };

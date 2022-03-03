@@ -17,7 +17,7 @@ public:
         glGenTextures(1, &ID);
         glBindTexture(GL_TEXTURE_2D, ID);
 
-        GLenum format;
+        GLint format;
         unsigned int colorDepth = image.getColorDepth();
         if (colorDepth == 1) {
             format = GL_RED;

@@ -3,6 +3,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <assimp/cimport.h>
 
 class ModelLoader {
     static std::vector<Mesh> meshes;
@@ -15,7 +16,11 @@ public:
         loadedTextures.clear();
 
         Assimp::Importer importer;
-        const aiScene* scene = importer.ReadFile(modelPath, aiProcessPreset_TargetRealtime_Fast);
+        const aiScene* scene = importer.ReadFile(modelPath, aiProcess_Triangulate);
+        if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
+        {
+            std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
+        }
 
         directory = modelPath.substr(0, modelPath.find_last_of('\\'));
         processNode(scene->mRootNode, scene);
@@ -84,7 +89,8 @@ private:
 //        std::vector<Texture> specularMaps = processTexturesByType(material, aiTextureType_SPECULAR, "specularMap");
 //        std::vector<Texture> ambientMaps = processTexturesByType(material, aiTextureType_AMBIENT, "ambientMap");
 
-        return {vertices, indices, textures};
+        Mesh m(vertices, indices, textures);
+        return m;
     }
 
     static std::vector<Texture> processTexturesByType(aiMaterial* material, aiTextureType aiType, TextureType type) {

@@ -26,7 +26,6 @@ add_executable(Imgui
     include/imgui/sdl_opengl3/imgui_impl_sdl.cpp
     include/imgui/sdl_opengl3/imgui_impl_sdl.h
 
-    include/stb/stb_image.h
-        src/main2.cpp include/framework/Camera.h include/framework/Grid.h include/framework/SceneObject.h include/framework/Scene.h include/framework/IScene.h include/framework/EventHandler.h)
+    include/stb/stb_image.h include/framework/Camera.h include/framework/SceneObject.h include/framework/Scene.h include/framework/IScene.h include/framework/EventHandler.h include/framework/Grid.h)
 
 target_link_libraries(Imgui mingw32 opengl32 glew32 SDL2main SDL2 assimp)

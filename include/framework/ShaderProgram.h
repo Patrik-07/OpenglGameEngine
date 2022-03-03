@@ -3,7 +3,7 @@
 class ShaderProgram {
     unsigned int ID = 0;
 public:
-    ShaderProgram(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometryShaderPath = nullptr) {
+    explicit ShaderProgram(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometryShaderPath = nullptr) {
         Shader vertexShader(vertexShaderPath, GL_VERTEX_SHADER);
         Shader fragmentShader(fragmentShaderPath, GL_FRAGMENT_SHADER);
         Shader geometryShader(geometryShaderPath, GL_GEOMETRY_SHADER);
@@ -73,12 +73,12 @@ public:
         } else printf("Invalid uniform name.\n");
     }
 
-    void setUniform(const std::string& name, const Texture& texture, int textureUnit = 0) const {
+    void setUniform(const std::string& name, unsigned int textureID, int textureUnit = 0) const {
         int location = glGetUniformLocation(ID, name.c_str());
         if (location != -1) {
             glActiveTexture(GL_TEXTURE0 + textureUnit);
             glUniform1i(location, textureUnit);
-            glBindTexture(GL_TEXTURE_2D, texture.getID());
+            glBindTexture(GL_TEXTURE_2D, textureID);
         } else printf("Invalid uniform name.\n");
     }
 

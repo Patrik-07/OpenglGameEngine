@@ -1,16 +1,11 @@
 #pragma once
 
-class Scene : IScene {
+class Scene : public IScene {
     std::vector<SceneObject*> objects;
-
-    const char* gridVSPath = "C:\\Users\\PatrikSanta\\Prog\\C++\\Imgui\\src\\shaders\\gridVertexShader.glsl";
-    const char* gridFSPath = "C:\\Users\\PatrikSanta\\Prog\\C++\\Imgui\\src\\shaders\\gridFragmentShader.glsl";
-
-    ShaderProgram gridShader;
     Grid grid;
 public:
     Camera camera;
-    explicit Scene() : camera(this), gridShader(gridVSPath, gridFSPath), grid(20) {}
+    explicit Scene(int& w, int& h) : IScene(w, h), camera(*this) {}
 
     void addSceneObject(SceneObject& sceneObject) {
         sceneObject.setViewMatrix(camera.getViewMatrix());
@@ -19,10 +14,10 @@ public:
     }
 
     void draw() {
-        drawGrid();
         for (int i = 0; i < objects.size(); i++) {
             objects[i]->draw();
         }
+        grid.draw(camera.getViewMatrix(), camera.getProjectionMatrix(), camera.getPosition());
     }
 
     void resize() {
@@ -35,24 +30,5 @@ private:
             objects[i]->setViewMatrix(camera.getViewMatrix());
             objects[i]->setProjectionMatrix(camera.getProjectionMatrix());
         }
-    }
-
-    void drawGrid() {
-        gridShader.use();
-
-        gridShader.setUniform("mvp.model", glm::scale(glm::mat4(1.0f), glm::vec3(10.0f)));
-        gridShader.setUniform("mvp.view", camera.getViewMatrix());
-        gridShader.setUniform("mvp.projection", camera.getProjectionMatrix());
-
-        glm::vec3 cameraPosition = camera.getPosition();
-        int y = (int)cameraPosition.y;
-        if (y > 60) {
-            grid.reset(12);
-        } else if (y > 30) {
-            grid.reset(16);
-        } else grid.reset(20);
-
-        gridShader.setUniform("cameraPosition", camera.getPosition());
-        grid.draw();
     }
 };

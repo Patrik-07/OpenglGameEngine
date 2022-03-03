@@ -141,7 +141,6 @@
 //
 //            float a[3];
 //            ImGui::DragFloat3("(x, y, z)", a, 0.3f);
-//            printf("%f ", a[0]);
 //            ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
 //            ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 //            ImGui::Checkbox("Another Window", &show_another_window);

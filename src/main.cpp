@@ -27,24 +27,30 @@ int main(int argc, char** argv) {
 //    Model hulkbusterModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\hulkbuster.obj)");
 //    Model lightModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\light.fbx)");
 //    Model bugattiModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\bugatti\bugatti.obj)");
-    Model backpackModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\backpack\backpack.obj)");
+//    Model backpackModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\backpack\backpack.obj)");
     Model duckModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\duck\10602_Rubber_Duck_v1_L3.obj)");
+
+    //    Model pistolModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\pistol\Gun Low Poly.fbx)");
+//    Model vampireModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\vampire\dancing_vampire.dae)");
 
 //    SceneObject hulkbuster(hulkbusterModel, shaderProgram);
 //    SceneObject light(lightModel, shaderProgram);
 //    SceneObject bugatti(bugattiModel, shaderProgram);
-    SceneObject backpack(backpackModel, shaderProgram);
+//    SceneObject backpack(backpackModel, shaderProgram);
     SceneObject duck(duckModel, shaderProgram);
+//    SceneObject pistol(pistolModel, shaderProgram);
+//    SceneObject vampire(vampireModel, shaderProgram);
 
 //    hulkbuster.scale(glm::vec3(2.0f));
-//    light.move(glm::vec3(0.0f, 20.0f, 0.0f));
+//    light.moveTo(glm::vec3(0.0f, 20.0f, 0.0f));
 
-    Scene scene;
+    Scene scene(width, height);
 //    scene.addSceneObject(hulkbuster);
 //    scene.addSceneObject(light);
 //    scene.addSceneObject(bugatti);
 //    scene.addSceneObject(backpack);
     scene.addSceneObject(duck);
+//    scene.addSceneObject(vampire);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -56,13 +62,13 @@ int main(int argc, char** argv) {
     float boost = 0.0f;
     float cameraMovementSpeed = 0.05f;
 
-
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+    io.ConfigFlags |= ImGuiWindowFlags_NoDocking ;
 
     ImGui::StyleColorsDark();
 
@@ -75,10 +81,6 @@ int main(int argc, char** argv) {
 
     ImGui_ImplSDL2_InitForOpenGL(window, context);
     ImGui_ImplOpenGL3_Init("#version 330 core");
-
-    bool show_demo_window = true;
-    bool show_another_window = false;
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     float duckPosition[3] = { 0.0f, 0.0f, 0.0f };
     float duckRotation[3] = { 0.0f, 0.0f, 0.0f };
@@ -94,31 +96,33 @@ int main(int argc, char** argv) {
         timeAtLastFrame = timeAtThisFrame;
 
         const Uint8 *state = SDL_GetKeyboardState(nullptr);
-        if (state[SDL_SCANCODE_W]) {
-            scene.camera.move(FORTH, cameraMovementSpeed + boost);
-        }
-        if (state[SDL_SCANCODE_A]) {
-            scene.camera.move(LEFT, cameraMovementSpeed + boost);
-        }
-        if (state[SDL_SCANCODE_S]) {
-            scene.camera.move(BACK, cameraMovementSpeed + boost);
-        }
-        if (state[SDL_SCANCODE_D]) {
-            scene.camera.move(RIGHT, cameraMovementSpeed + boost);
-        }
-        if (state[SDL_SCANCODE_E]) {
-            scene.camera.position.y += (0.05f + boost);
-            scene.camera.refresh();
-        }
-        if (state[SDL_SCANCODE_Q]) {
-            scene.camera.position.y -= (0.05f + boost);
-            scene.camera.refresh();
-        }
-        if (state[SDL_SCANCODE_LSHIFT]) {
-            if (cameraMovementSpeed + boost < 0.5) {
-                boost += 0.01f;
+        if (opened) {
+            if (state[SDL_SCANCODE_W]) {
+                scene.camera.move(FORTH, cameraMovementSpeed + boost);
             }
-        } else boost = 0.0f;
+            if (state[SDL_SCANCODE_A]) {
+                scene.camera.move(LEFT, cameraMovementSpeed + boost);
+            }
+            if (state[SDL_SCANCODE_S]) {
+                scene.camera.move(BACK, cameraMovementSpeed + boost);
+            }
+            if (state[SDL_SCANCODE_D]) {
+                scene.camera.move(RIGHT, cameraMovementSpeed + boost);
+            }
+            if (state[SDL_SCANCODE_E]) {
+                scene.camera.position.y += (0.05f + boost);
+                scene.camera.refresh();
+            }
+            if (state[SDL_SCANCODE_Q]) {
+                scene.camera.position.y -= (0.05f + boost);
+                scene.camera.refresh();
+            }
+            if (state[SDL_SCANCODE_LSHIFT]) {
+                if (cameraMovementSpeed + boost < 0.5) {
+                    boost += 0.01f;
+                }
+            } else boost = 0.0f;
+        }
 
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
@@ -132,6 +136,37 @@ int main(int argc, char** argv) {
                 if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
                     SDL_GetWindowSize(window, &width, &height);
                     scene.resize();
+
+                    glDeleteFramebuffers(GL_FRAMEBUFFER, &FBO);
+                    glDeleteTextures(1, &frameBufferTextureID);
+                    glDeleteTextures(1, &frameBufferDepthID);
+                    frameBufferTextureID = 0;
+                    frameBufferDepthID = 0;
+
+                    glGenFramebuffers(1, &FBO);
+                    glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+
+                    glGenTextures(1, &frameBufferTextureID);
+                    glBindTexture(GL_TEXTURE_2D, frameBufferTextureID);
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, scene.width, scene.height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameBufferTextureID, 0);
+
+                    glCreateTextures(GL_TEXTURE_2D, 1, &frameBufferDepthID);
+                    glBindTexture(GL_TEXTURE_2D, frameBufferDepthID);
+                    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, width, width);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, frameBufferDepthID, 0);
+
+                    glBindFramebuffer(GL_FRAMEBUFFER, 0);
                 }
             }
 
@@ -151,62 +186,87 @@ int main(int argc, char** argv) {
 
             if (event.type == SDL_MOUSEMOTION) {
                 if (middleButtonDown) {
-                    auto x = (float) event.motion.x;
-                    auto y = (float) event.motion.y;
+                    if(opened) {
+                        auto x = (float) event.motion.x;
+                        auto y = (float) event.motion.y;
 
-                    if (first) {
+                        if (first) {
+                            prevX = x;
+                            prevY = y;
+                            first = false;
+                        }
+
+                        float offsetX = x - prevX;
+                        float offsetY = prevY - y;
+
+                        float mouseSensitivity = 5.0f;
+                        offsetX *= mouseSensitivity;
+                        offsetY *= mouseSensitivity;
+
+                        scene.camera.rotate(offsetX * dt, offsetY * dt);
+
                         prevX = x;
                         prevY = y;
-                        first = false;
                     }
-
-                    float offsetX = x - prevX;
-                    float offsetY = prevY - y;
-
-                    float mouseSensitivity = 5.0f;
-                    offsetX *= mouseSensitivity;
-                    offsetY *= mouseSensitivity;
-
-                    scene.camera.rotate(offsetX * dt, offsetY * dt);
-
-                    prevX = x;
-                    prevY = y;
                 }
             }
         }
 
-        // Start the Dear ImGui frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplSDL2_NewFrame();
-        ImGui::NewFrame();
+        imguiPreRender();
+        ImGui::DockSpaceOverViewport();
+
+        if(ImGui::BeginMainMenuBar())
+        {
+            if (ImGui::BeginMenu("File"))
+            {
+                if(ImGui::MenuItem("New"))
+                {
+                    //Do something
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndMainMenuBar();
+        }
 
         {
-            ImGui::Begin("Duck properties");
+            ImGui::Begin("Models");
 
-            ImGui::DragFloat3("Position", duckPosition);
-            ImGui::DragFloat3("Rotation", duckRotation, 5.0f);
-            ImGui::DragFloat3("Scale", duckScale);
+            ImGui::Text("x, y, z");
+            ImGui::DragFloat3(" Position", duckPosition, 0.2f);
+            ImGui::DragFloat3(" Rotation", duckRotation, 0.2f);
+            ImGui::DragFloat3(" Scale", duckScale, 0.2f);
 
             duck.moveTo(glm::vec3(duckPosition[0], duckPosition[2], duckPosition[1]));
 
-            duck.rotate(glm::radians(duckRotation[0]), glm::vec3(1, 0, 0));
-            duck.rotate(glm::radians(duckRotation[2]), glm::vec3(0, 1, 0));
-            duck.rotate(glm::radians(duckRotation[1]), glm::vec3(0, 0, 1));
+            duck.rotate(glm::radians(duckRotation[0] - 90), glm::vec3(1, 0, 0));
+            duck.rotate(glm::radians(duckRotation[2]), glm::vec3(0, 0, 1));
+            duck.rotate(glm::radians(duckRotation[1]), glm::vec3(0, 1, 0));
 
             duck.scale(glm::vec3(duckScale[0], duckScale[2], duckScale[1]));
 
             ImGui::Text("");
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
             ImGui::End();
         }
 
-        ImGui::Render();
-        glViewport(0, 0, width, height);
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        scene.draw();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        {
+            ImGui::Begin("Project");
+            ImGui::End();
+        }
 
+        {
+            ImGui::Begin("Inspector");
+            ImGui::End();
+        }
+
+        glViewport(0, 0, width, height);
+        glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        sceneRender(scene);
+//        scene.draw();
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         {
             SDL_Window* backup_current_window = SDL_GL_GetCurrentWindow();
