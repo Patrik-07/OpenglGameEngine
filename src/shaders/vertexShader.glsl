@@ -10,7 +10,6 @@ struct MVP {
     mat4 view;
     mat4 projection;
 };
-
 uniform MVP mvp;
 
 void main() {

@@ -42,7 +42,7 @@ namespace glm
 	/// @param x The values of the argument must be greater or equal to zero.
 	/// @tparam T floating point scalar types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/round.xml">GLSL round man page</a>
+	/// @see <a href="http://www.Opengl.org/sdk/docs/manglsl/xhtml/round.xml">GLSL round man page</a>
 	/// @see gtc_integer
 	template<length_t L, typename T, qualifier Q>
 	GLM_FUNC_DECL vec<L, int, Q> iround(vec<L, T, Q> const& x);
@@ -54,7 +54,7 @@ namespace glm
 	/// @param x The values of the argument must be greater or equal to zero.
 	/// @tparam T floating point scalar types.
 	///
-	/// @see <a href="http://www.opengl.org/sdk/docs/manglsl/xhtml/round.xml">GLSL round man page</a>
+	/// @see <a href="http://www.Opengl.org/sdk/docs/manglsl/xhtml/round.xml">GLSL round man page</a>
 	/// @see gtc_integer
 	template<length_t L, typename T, qualifier Q>
 	GLM_FUNC_DECL vec<L, uint, Q> uround(vec<L, T, Q> const& x);

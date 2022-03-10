@@ -294,7 +294,7 @@ CODE
        // TODO: Setup render state: alpha-blending enabled, no face culling, no depth testing, scissor enabled
        // TODO: Setup viewport covering draw_data->DisplayPos to draw_data->DisplayPos + draw_data->DisplaySize
        // TODO: Setup orthographic projection matrix cover draw_data->DisplayPos to draw_data->DisplayPos + draw_data->DisplaySize
-       // TODO: Setup shader: vertex { float2 pos, float2 uv, u32 color }, fragment shader sample color from 1 texture, multiply by vertex color.
+       // TODO: Setup Shader: vertex { float2 pos, float2 uv, u32 color }, fragment Shader sample color from 1 texture, multiply by vertex color.
        ImVec2 clip_off = draw_data->DisplayPos;
        for (int n = 0; n < draw_data->CmdListsCount; n++)
        {
@@ -17350,7 +17350,7 @@ static void SetClipboardTextFn_DefaultImpl(void*, const char* text)
 static PasteboardRef main_clipboard = 0;
 
 // OSX clipboard implementation
-// If you enable this you will need to add '-framework ApplicationServices' to your linker command-line!
+// If you enable this you will need to add '-Framework ApplicationServices' to your linker command-line!
 static void SetClipboardTextFn_DefaultImpl(void*, const char* text)
 {
     if (!main_clipboard)

@@ -41,9 +41,9 @@ public:
     void draw() {
         shaderProgram.use();
 
-        shaderProgram.setUniform("mvp.model", modelMatrix);
-        shaderProgram.setUniform("mvp.view", viewMatrix);
-        shaderProgram.setUniform("mvp.projection", projectionMatrix);
+        shaderProgram.setUniform("mvp.model", glm::value_ptr(modelMatrix));
+        shaderProgram.setUniform("mvp.view", glm::value_ptr(viewMatrix));
+        shaderProgram.setUniform("mvp.projection", glm::value_ptr(projectionMatrix));
 
         model.draw(shaderProgram);
     }

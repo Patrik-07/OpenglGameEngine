@@ -14,21 +14,26 @@ public:
     }
 
     void draw() {
-        for (int i = 0; i < objects.size(); i++) {
-            objects[i]->draw();
-        }
         grid.draw(camera.getViewMatrix(), camera.getProjectionMatrix(), camera.getPosition());
+        for (SceneObject* object : objects) {
+            object->draw();
+        }
     }
 
     void resize() {
+        update();
+    }
+
+    void update() {
+        camera.update();
         refresh();
     }
 
 private:
     void refresh() override {
-        for (int i = 0; i < objects.size(); i++) {
-            objects[i]->setViewMatrix(camera.getViewMatrix());
-            objects[i]->setProjectionMatrix(camera.getProjectionMatrix());
+        for (SceneObject* object : objects) {
+            object->setViewMatrix(camera.getViewMatrix());
+            object->setProjectionMatrix(camera.getProjectionMatrix());
         }
     }
 };

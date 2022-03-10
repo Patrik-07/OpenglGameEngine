@@ -1,17 +1,6 @@
-#include <iostream>
-#include "framework/framework.h"
-
-#include <glm/vec3.hpp> // glm::vec3
-#include <glm/mat4x4.hpp> // glm::mat4
-#include <glm/ext/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale
-#include <glm/ext/matrix_clip_space.hpp> // glm::perspective
-#include <chrono>
-
-const char* vertexShaderPath = "C:\\Users\\PatrikSanta\\Prog\\C++\\Imgui\\src\\shaders\\vertexShader01.glsl";
-const char* fragmentShaderPath = "C:\\Users\\PatrikSanta\\Prog\\C++\\Imgui\\src\\shaders\\fragmentShader01.glsl";
-
-const char* imgPath01 = "C:\\Users\\PatrikSanta\\Prog\\C++\\Imgui\\res\\img01.png";
-const char* imgPath02 = "C:\\Users\\PatrikSanta\\Prog\\C++\\Imgui\\res\\container.jpg";
+#include "Framework/framework.h"
+#include "resources.h"
+#include <glm/vec3.hpp>
 
 int main(int argc, char** argv) {
     SDL_Window* window;
@@ -22,38 +11,17 @@ int main(int argc, char** argv) {
 
     setupImGui(window, context);
 
-    ShaderProgram shaderProgram(vertexShaderPath, fragmentShaderPath);
+    ShaderProgram shaderProgram(
+        RESOURCES::VERTEX_SHADER_SOURCE,
+        RESOURCES::FRAGMENT_SHADER_SOURCE
+    );
 
-//    Model hulkbusterModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\hulkbuster.obj)");
-//    Model lightModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\light.fbx)");
-//    Model bugattiModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\bugatti\bugatti.obj)");
-//    Model backpackModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\backpack\backpack.obj)");
     Model duckModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\duck\10602_Rubber_Duck_v1_L3.obj)");
-
-    //    Model pistolModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\pistol\Gun Low Poly.fbx)");
-//    Model vampireModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\vampire\dancing_vampire.dae)");
-
-//    SceneObject hulkbuster(hulkbusterModel, shaderProgram);
-//    SceneObject light(lightModel, shaderProgram);
-//    SceneObject bugatti(bugattiModel, shaderProgram);
-//    SceneObject backpack(backpackModel, shaderProgram);
     SceneObject duck(duckModel, shaderProgram);
-//    SceneObject pistol(pistolModel, shaderProgram);
-//    SceneObject vampire(vampireModel, shaderProgram);
-
-//    hulkbuster.scale(glm::vec3(2.0f));
-//    light.moveTo(glm::vec3(0.0f, 20.0f, 0.0f));
 
     Scene scene(width, height);
-//    scene.addSceneObject(hulkbuster);
-//    scene.addSceneObject(light);
-//    scene.addSceneObject(bugatti);
-//    scene.addSceneObject(backpack);
     scene.addSceneObject(duck);
-//    scene.addSceneObject(vampire);
 
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     float prevX = (float)width / 2;
     float prevY = (float)height / 2;
 
@@ -111,11 +79,11 @@ int main(int argc, char** argv) {
             }
             if (state[SDL_SCANCODE_E]) {
                 scene.camera.position.y += (0.05f + boost);
-                scene.camera.refresh();
+                //scene.camera.refresh();
             }
             if (state[SDL_SCANCODE_Q]) {
                 scene.camera.position.y -= (0.05f + boost);
-                scene.camera.refresh();
+                //scene.camera.refresh();
             }
             if (state[SDL_SCANCODE_LSHIFT]) {
                 if (cameraMovementSpeed + boost < 0.5) {
@@ -230,7 +198,7 @@ int main(int argc, char** argv) {
 
         {
             ImGui::Begin("Models");
-
+            ImGui::LoadingBar("Loading");
             ImGui::Text("x, y, z");
             ImGui::DragFloat3(" Position", duckPosition, 0.2f);
             ImGui::DragFloat3(" Rotation", duckRotation, 0.2f);
@@ -263,7 +231,9 @@ int main(int argc, char** argv) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         sceneRender(scene);
-//        scene.draw();
+
+        scene.update();
+        scene.draw();
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -285,11 +255,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
-
-//        gridShader02.use();
-//        gridShader02.setUniform("mvp.view", view);
-//        gridShader02.setUniform("mvp.projection", projection);
-//        gridShader02.setUniform("cameraPos", camera.getPosition());
-//        glEnable(GL_DEPTH);
-//        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

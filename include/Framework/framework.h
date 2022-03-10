@@ -3,29 +3,38 @@
 static int width = 1920;
 static int height = 900;
 
-#include "vector"
-#include "fstream"
-#include "cstdio"
-
 #include "imgui/imgui.h"
 #include "imgui/sdl_opengl3/imgui_impl_sdl.h"
 #include "imgui/sdl_opengl3/imgui_impl_opengl3.h"
 
 #include "SDL2/SDL.h"
-#include "Glew/glew.h"
 
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-#include "Image.h"
-#include "Texture.h"
-#include "Shader.h"
-#include "ShaderProgram.h"
+#include "LoadingBar.h"
 
-#include "Vertex.h"
-#include "Mesh.h"
-#include "Model.h"
-#include "ModelLoader.h"
+// Opengl includes
+#include "Opengl/Buffer/VertexArray.h"
+#include "Opengl/Buffer/VertexBuffer.h"
+#include "Opengl/Buffer/ElementBuffer.h"
+
+#include "Opengl/Shader/Shader.h"
+#include "Opengl/Shader/ShaderProgram.h"
+
+#include "Opengl/Texture.h"
+
+// Model includes
+#include "Model/Vertex.h"
+
+#include "Model/Geometry.h"
+#include "Model/Material.h"
+
+#include "Model/Mesh.h"
+#include "Model/Model.h"
+
+// ModelLoader includes
+#include "ModelLoader/ModelLoader.h"
 
 #include "IScene.h"
 #include "SceneObject.h"
@@ -45,6 +54,8 @@ void setupOpenGL() {
     glViewport(0, 0, width, height);
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glGenFramebuffers(1, &FBO);
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);
@@ -159,6 +170,7 @@ void sceneRender(Scene& scene) {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     ImGui::Begin("Scene");
+    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     opened = ImGui::IsWindowFocused();
     ImVec2 pos = ImGui::GetCursorScreenPos();
     ImGui::GetWindowDrawList()->AddImage(

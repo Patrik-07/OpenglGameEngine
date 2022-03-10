@@ -1440,7 +1440,7 @@ extern DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window * win
  * display.
  *
  * Many platforms will refuse to set the display brightness in modern times.
- * You are better off using a shader to adjust gamma during rendering, or
+ * You are better off using a Shader to adjust gamma during rendering, or
  * something similar.
  *
  * \param window the window used to select the display whose brightness will
@@ -2010,14 +2010,14 @@ extern DECLSPEC void SDLCALL SDL_GL_GetDrawableSize(SDL_Window * window, int *w,
  * Adaptive vsync is implemented for some glX drivers with
  * GLX_EXT_swap_control_tear:
  *
- * https://www.opengl.org/registry/specs/EXT/glx_swap_control_tear.txt
+ * https://www.Opengl.org/registry/specs/EXT/glx_swap_control_tear.txt
  *
  * and for some Windows drivers with WGL_EXT_swap_control_tear:
  *
- * https://www.opengl.org/registry/specs/EXT/wgl_swap_control_tear.txt
+ * https://www.Opengl.org/registry/specs/EXT/wgl_swap_control_tear.txt
  *
  * Read more on the Khronos wiki:
- * https://www.khronos.org/opengl/wiki/Swap_Interval#Adaptive_Vsync
+ * https://www.khronos.org/Opengl/wiki/Swap_Interval#Adaptive_Vsync
  *
  * \param interval 0 for immediate updates, 1 for updates synchronized with
  *                 the vertical retrace, -1 for adaptive vsync

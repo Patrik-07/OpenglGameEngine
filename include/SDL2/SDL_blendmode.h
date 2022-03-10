@@ -139,7 +139,7 @@ typedef enum
  * - **direct3d11**: Supports all operations with all factors. However, some
  *   factors produce unexpected results with `SDL_BLENDOPERATION_MINIMUM` and
  *   `SDL_BLENDOPERATION_MAXIMUM`.
- * - **opengl**: Supports the `SDL_BLENDOPERATION_ADD` operation with all
+ * - **Opengl**: Supports the `SDL_BLENDOPERATION_ADD` operation with all
  *   factors. OpenGL versions 1.1, 1.2, and 1.3 do not work correctly with SDL
  *   2.0.6.
  * - **opengles**: Supports the `SDL_BLENDOPERATION_ADD` operation with all

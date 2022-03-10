@@ -32,10 +32,6 @@ public:
         scene.refresh();
     }
 
-    void refresh() {
-        scene.refresh();
-    }
-
     void rotate(float x, float y) {
         pitch += y;
         yaw += x;
@@ -51,7 +47,11 @@ public:
         scene.refresh();
     }
 
-    glm::vec3 getPosition() {
+    void update() {
+
+    }
+
+    glm::vec3 getPosition() const {
         return position;
     }
 
@@ -59,7 +59,7 @@ public:
         return glm::lookAt(position, position + target, up);
     }
 
-    glm::mat4 getProjectionMatrix() {
+    glm::mat4 getProjectionMatrix() const {
         return glm::perspective(glm::radians(45.0f), (float)scene.width / (float)scene.height, 0.1f, 1000.0f);
     }
 };

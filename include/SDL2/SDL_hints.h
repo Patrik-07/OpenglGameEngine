@@ -422,7 +422,7 @@ extern "C" {
  *  This variable can be set to the following values:
  *    "0"       - Disable 3D acceleration
  *    "1"       - Enable 3D acceleration, using the default renderer.
- *    "X"       - Enable 3D acceleration, using X where X is one of the valid rendering drivers.  (e.g. "direct3d", "opengl", etc.)
+ *    "X"       - Enable 3D acceleration, using X where X is one of the valid rendering drivers.  (e.g. "direct3d", "Opengl", etc.)
  *
  *  By default SDL tries to make a best guess for each platform whether
  *  to use acceleration or not.
@@ -1105,7 +1105,7 @@ extern "C" {
  *
  *  This variable is case insensitive and can be set to the following values:
  *    "direct3d"
- *    "opengl"
+ *    "Opengl"
  *    "opengles2"
  *    "opengles"
  *    "metal"
@@ -1407,12 +1407,12 @@ extern "C" {
 #define SDL_HINT_VIDEO_WINDOW_SHARE_PIXEL_FORMAT    "SDL_VIDEO_WINDOW_SHARE_PIXEL_FORMAT"
 
 /**
-*  \brief  A variable specifying which shader compiler to preload when using the Chrome ANGLE binaries
+*  \brief  A variable specifying which Shader compiler to preload when using the Chrome ANGLE binaries
 *
 *  SDL has EGL and OpenGL ES2 support on Windows via the ANGLE project. It
 *  can use two different sets of binaries, those compiled by the user from source
 *  or those provided by the Chrome browser. In the later case, these binaries require
-*  that SDL loads a DLL providing the shader compiler.
+*  that SDL loads a DLL providing the Shader compiler.
 *
 *  This variable can be set to the following values:
 *    "d3dcompiler_46.dll" - default, best for Vista or later.
