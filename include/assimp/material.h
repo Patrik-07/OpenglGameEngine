@@ -344,7 +344,7 @@ ASSIMP_API const char *TextureTypeToString(enum aiTextureType in);
  *
  *  The list of shading modes has been taken from Blender.
  *  See Blender documentation for more information. The API does
- *  not distinguish between "specular" and "diffuse" shaders (thus the
+ *  not distinguish between "specular" and "diffuse" Shaders (thus the
  *  specular term for diffuse shading models like Oren-Nayar remains
  *  undefined). <br>
  *  Again, this value is just a hint. Assimp tries to select the Shader whose

@@ -882,7 +882,7 @@ enum aiComponent
  * <tt>any_path/scripts/model_name.Shader</tt>. This property overrides this
  * behaviour. It can either specify a full path to the Shader to be loaded
  * or alternatively the path (relative or absolute) to the directory where
- * the shaders for all MD3s to be loaded reside. Assimp attempts to open
+ * the Shaders for all MD3s to be loaded reside. Assimp attempts to open
  * <tt>IMPORT_MD3_SHADER_SRC/model_name.Shader</tt> first, <tt>IMPORT_MD3_SHADER_SRC/file_name.Shader</tt>
  * is the fallback file. Note that IMPORT_MD3_SHADER_SRC should have a terminal (back)slash.
  * Property type: String. Default value: n/a.

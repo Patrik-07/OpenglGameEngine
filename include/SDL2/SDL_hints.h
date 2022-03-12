@@ -1128,13 +1128,13 @@ extern "C" {
 #define SDL_HINT_RENDER_LOGICAL_SIZE_MODE       "SDL_RENDER_LOGICAL_SIZE_MODE"
 
 /**
- *  \brief  A variable controlling whether the OpenGL render driver uses shaders if they are available.
+ *  \brief  A variable controlling whether the OpenGL render driver uses Shaders if they are available.
  *
  *  This variable can be set to the following values:
- *    "0"       - Disable shaders
- *    "1"       - Enable shaders
+ *    "0"       - Disable Shaders
+ *    "1"       - Enable Shaders
  *
- *  By default shaders are used if OpenGL supports them.
+ *  By default Shaders are used if OpenGL supports them.
  */
 #define SDL_HINT_RENDER_OPENGL_SHADERS      "SDL_RENDER_OPENGL_SHADERS"
 

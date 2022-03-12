@@ -12,12 +12,12 @@ int main(int argc, char** argv) {
     setupImGui(window, context);
 
     ShaderProgram shaderProgram(
-        RESOURCES::VERTEX_SHADER_SOURCE,
-        RESOURCES::FRAGMENT_SHADER_SOURCE
+        RESOURCE::SHADER::VERTEX_SHADER,
+        RESOURCE::SHADER::FRAGMENT_SHADER
     );
 
-    Model duckModel = ModelLoader::load(R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\duck\10602_Rubber_Duck_v1_L3.obj)");
-    SceneObject duck(duckModel, shaderProgram);
+    Model duckModel = Model::load<AssimpLoader>(RESOURCE::MODEL::DUCK, shaderProgram);
+    SceneObject duck = duckModel;
 
     Scene scene(width, height);
     scene.addSceneObject(duck);
