@@ -5,10 +5,9 @@ in vec3 far;
 in mat4 view;
 in mat4 projection;
 in vec3 vertexPosition;
+in vec3 cameraPosition;
 
 out vec4 color;
-
-uniform vec3 cameraPosition;
 
 vec4 grid(vec3 fragPos3D, float scale, bool drawAxis) {
     vec2 coord = fragPos3D.xz * scale;
@@ -18,10 +17,10 @@ vec4 grid(vec3 fragPos3D, float scale, bool drawAxis) {
     float minimumz = min(derivative.y, 1);
     float minimumx = min(derivative.x, 1);
     vec4 color = vec4(0.3f, 0.3f, 0.3f, 1.0f - min(line, 1.0f));
-    if(fragPos3D.x > -0.1f * minimumx && fragPos3D.x < 0.1f * minimumx) {
+    if (fragPos3D.x > -0.1f * minimumx && fragPos3D.x < 0.1f * minimumx) {
         color.y = 1.0f;
     }
-    if(fragPos3D.z > -0.1 * minimumz && fragPos3D.z < 0.1f * minimumz) {
+    if (fragPos3D.z > -0.1 * minimumz && fragPos3D.z < 0.1f * minimumz) {
         color.z = 1.0f;
     }
     return color;

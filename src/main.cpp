@@ -16,10 +16,15 @@ int main(int argc, char** argv) {
         RESOURCE::SHADER::FRAGMENT_SHADER
     );
 
-    Model duckModel = Model::load<AssimpLoader>(RESOURCE::MODEL::DUCK, shaderProgram);
-    SceneObject duck = duckModel;
+    // Load models
+    Model duckModel = Model::load<AssimpLoader>(RESOURCE::MODEL::DUCK);
+    SceneObject duck(duckModel, shaderProgram);
 
-    Scene scene(width, height);
+    // Create camera
+    Camera camera(shaderProgram);
+
+    // Init scene
+    Scene scene(width, height, camera);
     scene.addSceneObject(duck);
 
     float prevX = (float)width / 2;
@@ -59,31 +64,29 @@ int main(int argc, char** argv) {
     bool isRunning = true;
     while (isRunning) {
         auto timeAtThisFrame = std::chrono::system_clock::now();
-        std::chrono::duration<float> seconds = timeAtThisFrame - timeAtLastFrame;
-        float dt = seconds.count();
+        std::chrono::duration<float> milliseconds = (timeAtThisFrame - timeAtLastFrame);
+        float dt = milliseconds.count();
         timeAtLastFrame = timeAtThisFrame;
 
         const Uint8 *state = SDL_GetKeyboardState(nullptr);
         if (opened) {
             if (state[SDL_SCANCODE_W]) {
-                scene.camera.move(FORTH, cameraMovementSpeed + boost);
+                camera.move(FORTH, cameraMovementSpeed + boost);
             }
             if (state[SDL_SCANCODE_A]) {
-                scene.camera.move(LEFT, cameraMovementSpeed + boost);
+                camera.move(LEFT, cameraMovementSpeed + boost);
             }
             if (state[SDL_SCANCODE_S]) {
-                scene.camera.move(BACK, cameraMovementSpeed + boost);
+                camera.move(BACK, cameraMovementSpeed + boost);
             }
             if (state[SDL_SCANCODE_D]) {
-                scene.camera.move(RIGHT, cameraMovementSpeed + boost);
+                camera.move(RIGHT, cameraMovementSpeed + boost);
             }
             if (state[SDL_SCANCODE_E]) {
-                scene.camera.position.y += (0.05f + boost);
-                //scene.camera.refresh();
+                camera.position.y += ((4.0f * dt) + boost);
             }
             if (state[SDL_SCANCODE_Q]) {
-                scene.camera.position.y -= (0.05f + boost);
-                //scene.camera.refresh();
+                camera.position.y -= ((4.0f * dt) + boost);
             }
             if (state[SDL_SCANCODE_LSHIFT]) {
                 if (cameraMovementSpeed + boost < 0.5) {
@@ -103,7 +106,7 @@ int main(int argc, char** argv) {
             if (event.type == SDL_WINDOWEVENT) {
                 if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
                     SDL_GetWindowSize(window, &width, &height);
-                    scene.resize();
+                    scene.resize(width, height);
 
                     glDeleteFramebuffers(GL_FRAMEBUFFER, &FBO);
                     glDeleteTextures(1, &frameBufferTextureID);
@@ -167,11 +170,11 @@ int main(int argc, char** argv) {
                         float offsetX = x - prevX;
                         float offsetY = prevY - y;
 
-                        float mouseSensitivity = 5.0f;
+                        float mouseSensitivity = 5.0f * dt;
                         offsetX *= mouseSensitivity;
                         offsetY *= mouseSensitivity;
 
-                        scene.camera.rotate(offsetX * dt, offsetY * dt);
+                        camera.rotate(offsetX, offsetY);
 
                         prevX = x;
                         prevY = y;
@@ -183,26 +186,12 @@ int main(int argc, char** argv) {
         imguiPreRender();
         ImGui::DockSpaceOverViewport();
 
-        if(ImGui::BeginMainMenuBar())
-        {
-            if (ImGui::BeginMenu("File"))
-            {
-                if(ImGui::MenuItem("New"))
-                {
-                    //Do something
-                }
-                ImGui::EndMenu();
-            }
-            ImGui::EndMainMenuBar();
-        }
-
         {
             ImGui::Begin("Models");
-            ImGui::LoadingBar("Loading");
             ImGui::Text("x, y, z");
-            ImGui::DragFloat3(" Position", duckPosition, 0.2f);
-            ImGui::DragFloat3(" Rotation", duckRotation, 0.2f);
-            ImGui::DragFloat3(" Scale", duckScale, 0.2f);
+            ImGui::DragFloat3("Position", duckPosition, 0.2f);
+            ImGui::DragFloat3("Rotation", duckRotation, 0.2f);
+            ImGui::DragFloat3("Scale", duckScale, 0.2f);
 
             duck.moveTo(glm::vec3(duckPosition[0], duckPosition[2], duckPosition[1]));
 
@@ -216,24 +205,11 @@ int main(int argc, char** argv) {
             ImGui::End();
         }
 
-        {
-            ImGui::Begin("Project");
-            ImGui::End();
-        }
-
-        {
-            ImGui::Begin("Inspector");
-            ImGui::End();
-        }
-
         glViewport(0, 0, width, height);
         glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         sceneRender(scene);
-
-        scene.update();
-        scene.draw();
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

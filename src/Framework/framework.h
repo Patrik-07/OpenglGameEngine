@@ -31,11 +31,10 @@ static int height = 900;
 #include "ModelLoader/ModelLoader.h"
 #include "ModelLoader/AssimpLoader.h"
 
-#include "SceneBase.h"
-#include "SceneObject.h"
-#include "Camera.h"
-#include "Grid.h"
-#include "Scene.h"
+#include "Scene/SceneObject.h"
+#include "Scene/Camera.h"
+#include "Scene/Grid.h"
+#include "Scene/Scene.h"
 
 unsigned int FBO;
 unsigned int frameBufferTextureID;
@@ -160,6 +159,7 @@ void sceneRender(Scene& scene) {
     glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    scene.update();
     scene.draw();
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

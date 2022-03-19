@@ -43,7 +43,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   along with arithmetic operations to support vertex operations
   such as subdivision, smoothing etc.
 
-  While the code is kept as general as possible, arithmetic operations
+  While the code is kept as Types as possible, arithmetic operations
   that are not currently well-defined (and would cause compile errors
   due to missing operators in the math library), are commented.
   */

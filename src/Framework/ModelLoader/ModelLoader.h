@@ -4,5 +4,5 @@
 
 class ModelLoader {
 public:
-    virtual Model load(const std::string& modelPath, ShaderProgram& shaderProgram) = 0;
+    virtual Model load(const std::string& modelPath) = 0;
 };

@@ -579,7 +579,7 @@ extern DECLSPEC SDL_bool SDLCALL SDL_JoystickGetAttached(SDL_Joystick *joystick)
 extern DECLSPEC SDL_JoystickID SDLCALL SDL_JoystickInstanceID(SDL_Joystick *joystick);
 
 /**
- * Get the number of general axis controls on a joystick.
+ * Get the number of Types axis controls on a joystick.
  *
  * Often, the directional pad on a game controller will either look like 4
  * separate buttons or a POV hat, and not axes, but all of this is up to the

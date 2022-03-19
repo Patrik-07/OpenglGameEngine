@@ -201,7 +201,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * by a reference to it. <br>
  * This option might be useful if you are using some magic material names
  * to pass additional semantics through the content pipeline. This ensures
- * they won't be optimized away, but a general optimization is still
+ * they won't be optimized away, but a Types optimization is still
  * performed for materials not contained in the list.
  * Property type: String. Default value: n/a
  * @note Linefeeds, tabs or carriage returns are treated as whitespace.
@@ -288,7 +288,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * removed by the postprocessing step.<br>
  * This option might be useful if you are using some magic node names
  * to pass additional semantics through the content pipeline. This ensures
- * they won't be optimized away, but a general optimization is still
+ * they won't be optimized away, but a Types optimization is still
  * performed for nodes not contained in the list.
  * Property type: String. Default value: n/a
  * @note Linefeeds, tabs or carriage returns are treated as whitespace.

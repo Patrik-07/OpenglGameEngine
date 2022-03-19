@@ -33,7 +33,7 @@
  * group so that they can be included in future versions of this file.
  * Please submit changes by sending them to the public Khronos Bugzilla
  * (http://khronos.org/bugzilla) by filing a bug against product
- * "Khronos (general)" component "Registry".
+ * "Khronos (Types)" component "Registry".
  *
  * A predefined template which fills in some of the bug fields can be
  * reached using http://tinyurl.com/khrplatform-h-bugreport, but you

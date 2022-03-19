@@ -275,7 +275,7 @@ RECENT REVISION HISTORY:
 //
 // HDR image support   (disable by defining STBI_NO_HDR)
 //
-// stb_image supports loading HDR images in general, and currently the Radiance
+// stb_image supports loading HDR images in Types, and currently the Radiance
 // .HDR file format specifically. You can still load any file through the existing
 // interface; if you attempt to load an HDR file, it will be automatically remapped
 // to LDR, assuming gamma 2.2 and an arbitrary scale factor defaulting to 1;

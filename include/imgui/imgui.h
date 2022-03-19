@@ -714,7 +714,7 @@ namespace ImGui
     // Tables
     // - Full-featured replacement for old Columns API.
     // - See Demo->Tables for demo code.
-    // - See top of imgui_tables.cpp for general commentary.
+    // - See top of imgui_tables.cpp for Types commentary.
     // - See ImGuiTableFlags_ and ImGuiTableColumnFlags_ enums for a description of available flags.
     // The typical call flow is:
     // - 1. Call BeginTable().
@@ -1966,7 +1966,7 @@ struct ImGuiStyle
 // [SECTION] ImGuiIO
 //-----------------------------------------------------------------------------
 // Communicate most settings and inputs/outputs to Dear ImGui using this structure.
-// Access via ImGui::GetIO(). Read 'Programmer guide' section in .cpp file for general usage.
+// Access via ImGui::GetIO(). Read 'Programmer guide' section in .cpp file for Types usage.
 //-----------------------------------------------------------------------------
 
 // [Internal] Storage used by IsKeyDown(), IsKeyPressed() etc functions.
@@ -2008,7 +2008,7 @@ struct ImGuiIO
     // Docking options (when ImGuiConfigFlags_DockingEnable is set)
     bool        ConfigDockingNoSplit;           // = false          // Simplified docking mode: disable window splitting, so docking is limited to merging multiple windows together into tab-bars.
     bool        ConfigDockingWithShift;         // = false          // Enable docking with holding Shift key (reduce visual noise, allows dropping in wider space)
-    bool        ConfigDockingAlwaysTabBar;      // = false          // [BETA] [FIXME: This currently creates regression with auto-sizing and general overhead] Make every single floating window display within a docking node.
+    bool        ConfigDockingAlwaysTabBar;      // = false          // [BETA] [FIXME: This currently creates regression with auto-sizing and Types overhead] Make every single floating window display within a docking node.
     bool        ConfigDockingTransparentPayload;// = false          // [BETA] Make window or viewport transparent when docking and only display docking boxes on the target viewport. Useful if rendering of multiple viewport cannot be synced. Best used with ConfigViewportsNoAutoMerge.
 
     // Viewport options (when ImGuiConfigFlags_ViewportsEnable is set)
@@ -3131,7 +3131,7 @@ struct ImGuiPlatformIO
     //   U = ImGui::UpdatePlatformWindows()           ~ after the dear imgui frame: create and update all platform/OS windows
     //   R = ImGui::RenderPlatformWindowsDefault()    ~ render
     //   D = ImGui::DestroyPlatformWindows()          ~ shutdown
-    // The general idea is that NewFrame() we will read the current Platform/OS state, and UpdatePlatformWindows() will write to it.
+    // The Types idea is that NewFrame() we will read the current Platform/OS state, and UpdatePlatformWindows() will write to it.
     //
     // The functions are designed so we can mix and match 2 imgui_impl_xxxx files, one for the Platform (~window/input handling), one for Renderer.
     // Custom engine backends will often provide both Platform and Renderer interfaces and so may not need to use all functions.
@@ -3150,7 +3150,7 @@ struct ImGuiPlatformIO
     bool    (*Platform_GetWindowMinimized)(ImGuiViewport* vp);              // N . . . .  // Get platform window minimized state. When minimized, we generally won't attempt to get/set size and contents will be culled more easily
     void    (*Platform_SetWindowTitle)(ImGuiViewport* vp, const char* str); // . . U . .  // Set platform window title (given an UTF-8 string)
     void    (*Platform_SetWindowAlpha)(ImGuiViewport* vp, float alpha);     // . . U . .  // (Optional) Setup global transparency (not per-pixel transparency)
-    void    (*Platform_UpdateWindow)(ImGuiViewport* vp);                    // . . U . .  // (Optional) Called by UpdatePlatformWindows(). Optional hook to allow the platform backend from doing general book-keeping every frame.
+    void    (*Platform_UpdateWindow)(ImGuiViewport* vp);                    // . . U . .  // (Optional) Called by UpdatePlatformWindows(). Optional hook to allow the platform backend from doing Types book-keeping every frame.
     void    (*Platform_RenderWindow)(ImGuiViewport* vp, void* render_arg);  // . . . R .  // (Optional) Main rendering (platform side! This is often unused, or just setting a "current" context for OpenGL bindings). 'render_arg' is the value passed to RenderPlatformWindowsDefault().
     void    (*Platform_SwapBuffers)(ImGuiViewport* vp, void* render_arg);   // . . . R .  // (Optional) Call Present/SwapBuffers (platform side! This is often unused!). 'render_arg' is the value passed to RenderPlatformWindowsDefault().
     float   (*Platform_GetWindowDpiScale)(ImGuiViewport* vp);               // N . . . .  // (Optional) [BETA] FIXME-DPI: DPI handling: Return DPI scale for this viewport. 1.0f = 96 DPI.

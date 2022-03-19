@@ -1,10 +1,10 @@
 #include "Model.h"
 
-Model::Model(const std::vector<Mesh>& meshes, ShaderProgram& shaderProgram) : shaderProgram(shaderProgram) {
+Model::Model(const std::vector<Mesh>& meshes) {
     this->meshes = meshes;
 }
 
-void Model::draw() const {
+void Model::draw(ShaderProgram& shaderProgram) const {
     for (Mesh m : meshes) {
         m.draw(shaderProgram);
     }

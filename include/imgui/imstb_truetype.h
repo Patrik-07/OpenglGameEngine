@@ -244,7 +244,7 @@
 //   caching the bitmaps or glyph shapes this shouldn't be a big deal.
 //
 //   It appears to be very hard to programmatically determine what font a
-//   given file is in a general way. I provide an API for this, but I don't
+//   given file is in a Types way. I provide an API for this, but I don't
 //   recommend it.
 //
 //

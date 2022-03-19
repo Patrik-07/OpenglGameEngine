@@ -20,12 +20,12 @@ void ShaderProgram::use() const {
     glUseProgram(ID);
 }
 
-void ShaderProgram::setUniform(const std::string &name, bool value) const {
-    int location = glGetUniformLocation(ID, name.c_str());
-    if (location != -1) {
-        glUniform1i(location, value);
-    } else printf("Invalid uniform name.\n");
-}
+//void ShaderProgram::setUniform(const std::string &name, bool value) const {
+//    int location = glGetUniformLocation(ID, name.c_str());
+//    if (location != -1) {
+//        glUniform1i(location, value);
+//    } else printf("Invalid uniform name.\n");
+//}
 
 void ShaderProgram::setUniform(const std::string &name, int value) const {
     int location = glGetUniformLocation(ID, name.c_str());
@@ -45,7 +45,7 @@ void ShaderProgram::setUniform(const std::string &name, const float *vector, uns
     if (size <= 4) {
         int location = glGetUniformLocation(ID, name.c_str());
         if (location != -1) {
-            glUniform3fv(location, 1, vector);
+            glUniform4fv(location, 1, vector);
         } else printf("Invalid uniform name.\n");
     } else printf("Invalid vector length.\n");
 }

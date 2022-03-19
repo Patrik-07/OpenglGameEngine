@@ -4,24 +4,34 @@ enum Direction {
     FORTH, BACK, RIGHT, LEFT
 };
 
-class Camera {
+class Camera : public UniformProvider {
     glm::vec3 target;
     glm::vec3 up;
-
     float pitch, yaw;
+    float aspect = 2.0f;
 
-    SceneBase& scene;
 public:
+
     glm::vec3 position;
-    Camera(SceneBase& scene) : scene(scene) {
+    glm::mat4 viewMatrix;
+    glm::mat4 projectionMatrix;
+
+    Camera(ShaderProgram& shaderProgram) : UniformProvider("mvp", shaderProgram) {
         position = glm::vec3(15.0f, 10.0f, 15.0f);
         target = glm::vec3(-0.55f, -0.43f, -0.7f);
         up = glm::vec3(0.0f, 1.0f, 0.0f);
 
         yaw = -127.5f;
         pitch = -25.5f;
+
+        viewMatrix = updateViewMatrix();
+        projectionMatrix = updateProjectionMatrix();
+
+        setUniform("view", new UNIFORM::GL_MATRIX_4F_V(glm::value_ptr(viewMatrix)));
+        setUniform("projection", new UNIFORM::GL_MATRIX_4F_V(glm::value_ptr(projectionMatrix)));
     }
 
+    // Refactor this
     void move(Direction direction, float speed) {
         switch (direction) {
             case FORTH: position += speed * target; break;
@@ -29,7 +39,9 @@ public:
             case RIGHT: position += glm::normalize(glm::cross(target, up)) * speed; break;
             case LEFT: position -= glm::normalize(glm::cross(target, up)) * speed; break;
         }
-        scene.refresh();
+
+        viewMatrix = updateViewMatrix();
+        projectionMatrix = updateProjectionMatrix();
     }
 
     void rotate(float x, float y) {
@@ -44,22 +56,31 @@ public:
         target.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
         target = glm::normalize(target);
-        scene.refresh();
-    }
 
-    void update() {
-
+        viewMatrix = updateViewMatrix();
+        projectionMatrix = updateProjectionMatrix();
     }
 
     glm::vec3 getPosition() const {
         return position;
     }
 
-    glm::mat4 getViewMatrix() {
+    void setAspectRatio(float a) {
+        aspect = a;
+    }
+
+    void update() override {
+        UniformProvider::update();
+        viewMatrix = updateViewMatrix();
+        projectionMatrix = updateProjectionMatrix();
+    }
+
+private:
+    glm::mat4 updateViewMatrix() {
         return glm::lookAt(position, position + target, up);
     }
 
-    glm::mat4 getProjectionMatrix() const {
-        return glm::perspective(glm::radians(45.0f), (float)scene.width / (float)scene.height, 0.1f, 1000.0f);
+    glm::mat4 updateProjectionMatrix() {
+        return glm::perspective(glm::radians(45.0f), aspect, 0.1f, 1000.0f);
     }
 };

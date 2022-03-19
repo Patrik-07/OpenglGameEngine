@@ -676,7 +676,7 @@ CODE
  - 2015/05/03 (1.40) - removed style.AutoFitPadding, using style.WindowPadding makes more sense (the default values were already the same).
  - 2015/04/13 (1.38) - renamed IsClipped() to IsRectClipped(). Kept inline redirection function until 1.50.
  - 2015/04/09 (1.38) - renamed ImDrawList::AddArc() to ImDrawList::AddArcFast() for compatibility with future API
- - 2015/04/03 (1.38) - removed ImGuiCol_CheckHovered, ImGuiCol_CheckActive, replaced with the more general ImGuiCol_FrameBgHovered, ImGuiCol_FrameBgActive.
+ - 2015/04/03 (1.38) - removed ImGuiCol_CheckHovered, ImGuiCol_CheckActive, replaced with the more Types ImGuiCol_FrameBgHovered, ImGuiCol_FrameBgActive.
  - 2014/04/03 (1.38) - removed support for passing -FLT_MAX..+FLT_MAX as the range for a SliderFloat(). Use DragFloat() or Inputfloat() instead.
  - 2015/03/17 (1.36) - renamed GetItemBoxMin()/GetItemBoxMax()/IsMouseHoveringBox() to GetItemRectMin()/GetItemRectMax()/IsMouseHoveringRect(). Kept inline redirection function until 1.50.
  - 2015/03/15 (1.36) - renamed style.TreeNodeSpacing to style.IndentSpacing, ImGuiStyleVar_TreeNodeSpacing to ImGuiStyleVar_IndentSpacing
@@ -10328,7 +10328,7 @@ static bool ImGui::NavScoreItem(ImGuiNavItemData* result)
     // Axial check: if 'curr' has no link at all in some direction and 'cand' lies roughly in that direction, add a tentative link. This will only be kept if no "real" matches
     // are found, so it only augments the graph produced by the above method using extra links. (important, since it doesn't guarantee strong connectedness)
     // This is just to avoid buttons having no links in a particular direction when there's a suitable neighbor. you get good graphs without this too.
-    // 2017/09/29: FIXME: This now currently only enabled inside menu bars, ideally we'd disable it everywhere. Menus in particular need to catch failure. For general navigation it feels awkward.
+    // 2017/09/29: FIXME: This now currently only enabled inside menu bars, ideally we'd disable it everywhere. Menus in particular need to catch failure. For Types navigation it feels awkward.
     // Disabling it may lead to disconnected graphs when nodes are very spaced out on different axis. Perhaps consider offering this as an option?
     if (result->DistBox == FLT_MAX && dist_axial < result->DistAxial)  // Check axial match
         if (g.NavLayer == ImGuiNavLayer_Menu && !(g.NavWindow->Flags & ImGuiWindowFlags_ChildMenu))
@@ -13263,7 +13263,7 @@ void ImGui::UpdatePlatformWindows()
             g.PlatformIO.Platform_SetWindowAlpha(viewport, viewport->Alpha);
         viewport->LastAlpha = viewport->Alpha;
 
-        // Optional, general purpose call to allow the backend to perform general book-keeping even if things haven't changed.
+        // Optional, Types purpose call to allow the backend to perform Types book-keeping even if things haven't changed.
         if (g.PlatformIO.Platform_UpdateWindow)
             g.PlatformIO.Platform_UpdateWindow(viewport);
 

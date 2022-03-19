@@ -1,6 +1,7 @@
 /// @ref gtc_type_ptr
 
 #include <cstring>
+#include "../../../src/Framework/Opengl/Uniform/Base/UniformValue.h"
 
 namespace glm
 {
@@ -74,7 +75,7 @@ namespace glm
 	}
 
 	template<typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER T* value_ptr(mat<4, 4, T, Q>& m)
+	GLM_FUNC_QUALIFIER T const* value_ptr(mat<4, 4, T, Q>& m)
 	{
 		return &(m[0].x);
 	}
@@ -122,7 +123,7 @@ namespace glm
 	}
 
 	template<typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER T* value_ptr(mat<4, 2, T, Q>& m)
+	GLM_FUNC_QUALIFIER T const* value_ptr(mat<4, 2, T, Q>& m)
 	{
 		return &(m[0].x);
 	}
@@ -146,7 +147,7 @@ namespace glm
 	}
 
 	template<typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER T * value_ptr(mat<4, 3, T, Q>& m)
+	GLM_FUNC_QUALIFIER T const* value_ptr(mat<4, 3, T, Q>& m)
 	{
 		return &(m[0].x);
 	}

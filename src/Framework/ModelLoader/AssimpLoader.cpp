@@ -3,7 +3,7 @@
 #include "../Opengl/Texture.h"
 #include "../Model/Mesh.h"
 
-Model AssimpLoader::load(const std::string& modelPath, ShaderProgram& shaderProgram) {
+Model AssimpLoader::load(const std::string& modelPath) {
     directory = "";
     loadedTextures.clear();
 
@@ -17,8 +17,7 @@ Model AssimpLoader::load(const std::string& modelPath, ShaderProgram& shaderProg
     directory = modelPath.substr(0, modelPath.find_last_of('\\'));
     processNode(scene->mRootNode, scene);
 
-    sp = shaderProgram;
-    return {meshes, sp};
+    return {meshes};
 }
 
 void AssimpLoader::processNode(aiNode *node, const aiScene *scene) {
@@ -69,8 +68,8 @@ Material AssimpLoader::processMaterial(aiMesh *mesh, const aiScene *scene) {
     textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
     textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 
-    Material material(sp);
-    material.addUniform(Uniform<Texture>())
+//    Material material(sp);
+//    material.addUniform(Uniform<Texture>())
 
     return Material(textures);
 }

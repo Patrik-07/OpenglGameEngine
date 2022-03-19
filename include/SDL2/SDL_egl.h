@@ -483,7 +483,7 @@ typedef EGLNativeWindowType  NativeWindowType;
 /* Define EGLint. This must be a signed integral type large enough to contain
  * all legal attribute names and values passed into and out of EGL, whether
  * their type is boolean, bitmask, enumerant (symbolic constant), integer,
- * handle, or other.  While in general a 32-bit integer will suffice, if
+ * handle, or other.  While in Types a 32-bit integer will suffice, if
  * handles are 64 bit types, then EGLint should be defined as a signed 64-bit
  * integer type.
  */

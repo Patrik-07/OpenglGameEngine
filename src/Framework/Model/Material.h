@@ -4,17 +4,14 @@
 
 #include "../Opengl/Texture.h"
 #include "../Opengl/Shader/ShaderProgram.h"
-#include "../Opengl/Shader/Uniform.h"
-#include "../Opengl/Shader/UniformProvider.h"
+#include "../Opengl/Uniform/Base/UniformBase.h"
+#include "../Opengl/Uniform/UniformProvider.h"
 
-class Material : UniformProvider {
+class Material {
 public:
     std::vector<Texture> textures;
 
-    Material(ShaderProgram shaderProgram) : UniformProvider("material", shaderProgram) {}
-//    void setUniforms(std::initializer_list<UniformBase> uniforms) {
-//
-//    }
+    Material() {}
 
     explicit Material(std::vector<Texture> textures);
     void update(ShaderProgram& shaderProgram);

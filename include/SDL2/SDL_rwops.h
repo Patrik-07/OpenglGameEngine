@@ -22,7 +22,7 @@
 /**
  *  \file SDL_rwops.h
  *
- *  This file provides a general interface for SDL to read and write
+ *  This file provides a Types interface for SDL to read and write
  *  data streams.  It can easily be extended to files, memory, etc.
  */
 

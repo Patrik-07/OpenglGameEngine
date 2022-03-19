@@ -798,7 +798,7 @@ bool ImGui::CloseButton(ImGuiID id, const ImVec2& pos)
     ImGuiWindow* window = g.CurrentWindow;
 
     // Tweak 1: Shrink hit-testing area if button covers an abnormally large proportion of the visible region. That's in order to facilitate moving the window away. (#3825)
-    // This may better be applied as a general hit-rect reduction mechanism for all widgets to ensure the area to move window is always accessible?
+    // This may better be applied as a Types hit-rect reduction mechanism for all widgets to ensure the area to move window is always accessible?
     const ImRect bb(pos, pos + ImVec2(g.FontSize, g.FontSize) + g.Style.FramePadding * 2.0f);
     ImRect bb_interact = bb;
     const float area_to_visible_ratio = window->OuterRectClipped.GetArea() / bb.GetArea();
@@ -1810,7 +1810,7 @@ bool ImGui::Combo(const char* label, int* current_item, bool (*items_getter)(voi
     if (*current_item >= 0 && *current_item < items_count)
         items_getter(data, *current_item, &preview_value);
 
-    // The old Combo() API exposed "popup_max_height_in_items". The new more general BeginCombo() API doesn't have/need it, but we emulate it here.
+    // The old Combo() API exposed "popup_max_height_in_items". The new more Types BeginCombo() API doesn't have/need it, but we emulate it here.
     if (popup_max_height_in_items != -1 && !(g.NextWindowData.Flags & ImGuiNextWindowDataFlags_HasSizeConstraint))
         SetNextWindowSizeConstraints(ImVec2(0, 0), ImVec2(FLT_MAX, CalcMaxPopupHeightFromItemCount(popup_max_height_in_items)));
 
@@ -3958,7 +3958,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
         window->DC.CursorPos = backup_pos;
 
         // We reproduce the contents of BeginChildFrame() in order to provide 'label' so our window internal data are easier to read/debug.
-        // FIXME-NAV: Pressing NavActivate will trigger general child activation right before triggering our own below. Harmless but bizarre.
+        // FIXME-NAV: Pressing NavActivate will trigger Types child activation right before triggering our own below. Harmless but bizarre.
         PushStyleColor(ImGuiCol_ChildBg, style.Colors[ImGuiCol_FrameBg]);
         PushStyleVar(ImGuiStyleVar_ChildRounding, style.FrameRounding);
         PushStyleVar(ImGuiStyleVar_ChildBorderSize, style.FrameBorderSize);

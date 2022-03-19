@@ -433,7 +433,7 @@ void ImGui::ShowDemoWindow(bool* p_open)
         ImGui::BulletText("Sections below are demonstrating many aspects of the library.");
         ImGui::BulletText("The \"Examples\" menu above leads to more demo contents.");
         ImGui::BulletText("The \"Tools\" menu above gives access to: About Box, Style Editor,\n"
-                          "and Metrics/Debugger (general purpose Dear ImGui debugging tool).");
+                          "and Metrics/Debugger (Types purpose Dear ImGui debugging tool).");
         ImGui::Separator();
 
         ImGui::Text("PROGRAMMER GUIDE:");
@@ -706,7 +706,7 @@ static void ShowDemoWindowWidgets()
             static int item_current = 0;
             ImGui::Combo("combo", &item_current, items, IM_ARRAYSIZE(items));
             ImGui::SameLine(); HelpMarker(
-                "Using the simplified one-liner Combo API here.\nRefer to the \"Combo\" section below for an explanation of how to use the more flexible and general BeginCombo/EndCombo API.");
+                "Using the simplified one-liner Combo API here.\nRefer to the \"Combo\" section below for an explanation of how to use the more flexible and Types BeginCombo/EndCombo API.");
         }
 
         {
@@ -815,7 +815,7 @@ static void ShowDemoWindowWidgets()
             static int item_current = 1;
             ImGui::ListBox("listbox", &item_current, items, IM_ARRAYSIZE(items), 4);
             ImGui::SameLine(); HelpMarker(
-                "Using the simplified one-liner ListBox API here.\nRefer to the \"List boxes\" section below for an explanation of how to use the more flexible and general BeginListBox/EndListBox API.");
+                "Using the simplified one-liner ListBox API here.\nRefer to the \"List boxes\" section below for an explanation of how to use the more flexible and Types BeginListBox/EndListBox API.");
         }
 
         ImGui::TreePop();

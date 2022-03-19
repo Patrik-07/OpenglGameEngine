@@ -24,7 +24,7 @@ class AssimpLoader : public ModelLoader {
     static std::vector<Texture> loadedTextures;
 
 public:
-    Model load(const std::string& modelPath, ShaderProgram& shaderProgram) override;
+    Model load(const std::string& modelPath) override;
 
 private:
     static void processNode(aiNode* node, const aiScene* scene);
