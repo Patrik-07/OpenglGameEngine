@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Camera.h"
+#include "../Opengl/Uniform/UniformProvider.h"
+
 class GridUniformProvider : public UniformProvider {
 public:
     GridUniformProvider(Camera& camera, ShaderProgram& shaderProgram) : UniformProvider("camera", shaderProgram) {

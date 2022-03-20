@@ -2,6 +2,7 @@
 
 #include "../Opengl/Uniform/Uniforms.h"
 #include "../Opengl/Uniform/Base/MatrixUniformValue.h"
+#include "../Model/Model.h"
 
 class SceneObject : public UniformProvider {
     Model& model;

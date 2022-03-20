@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Opengl/Uniform/UniformProvider.h"
+
 enum Direction {
     FORTH, BACK, RIGHT, LEFT
 };
@@ -11,7 +13,6 @@ class Camera : public UniformProvider {
     float aspect = 2.0f;
 
 public:
-
     glm::vec3 position;
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
@@ -31,7 +32,6 @@ public:
         setUniform("projection", new UNIFORM::GL_MATRIX_4F_V(glm::value_ptr(projectionMatrix)));
     }
 
-    // Refactor this
     void move(Direction direction, float speed) {
         switch (direction) {
             case FORTH: position += speed * target; break;
@@ -39,9 +39,7 @@ public:
             case RIGHT: position += glm::normalize(glm::cross(target, up)) * speed; break;
             case LEFT: position -= glm::normalize(glm::cross(target, up)) * speed; break;
         }
-
-        viewMatrix = updateViewMatrix();
-        projectionMatrix = updateProjectionMatrix();
+        updateMatrices();
     }
 
     void rotate(float x, float y) {
@@ -57,8 +55,7 @@ public:
 
         target = glm::normalize(target);
 
-        viewMatrix = updateViewMatrix();
-        projectionMatrix = updateProjectionMatrix();
+        updateMatrices();
     }
 
     glm::vec3 getPosition() const {
@@ -71,11 +68,15 @@ public:
 
     void update() override {
         UniformProvider::update();
+        updateMatrices();
+    }
+
+private:
+    void updateMatrices() {
         viewMatrix = updateViewMatrix();
         projectionMatrix = updateProjectionMatrix();
     }
 
-private:
     glm::mat4 updateViewMatrix() {
         return glm::lookAt(position, position + target, up);
     }

@@ -11,12 +11,14 @@
 class Scene  {
     std::vector<SceneObject*> objects;
     Camera& camera;
+    Grid grid;
 
 public:
     int width, height;
-    Grid grid;
+    bool hasFocus;
 
     explicit Scene(int& w, int& h, Camera& camera) : grid(camera), camera(camera) {
+        hasFocus = false;
         resize(w, h);
     }
 
