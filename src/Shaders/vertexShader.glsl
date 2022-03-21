@@ -13,6 +13,6 @@ struct MVP {
 uniform MVP mvp;
 
 void main() {
-    gl_Position = mvp.projection * mvp.view * mvp.model * vec4(vertexPositionCoord, 1.0);
     texCoord = vertexTextureCoord;
+    gl_Position = mvp.projection * mvp.view * mvp.model * vec4(vertexPositionCoord, 1.0);
 }

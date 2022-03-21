@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "../Opengl/Texture.h"
+#include "../Opengl/Texture/Texture.h"
 #include "../Opengl/Shader/ShaderProgram.h"
 #include "../Opengl/Uniform/Base/UniformBase.h"
 #include "../Opengl/Uniform/UniformProvider.h"

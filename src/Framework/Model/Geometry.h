@@ -7,6 +7,7 @@
 #include "Vertex.h"
 
 class Geometry {
+public:
     VertexArray vertexArray = VertexArray::create();
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;

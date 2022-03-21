@@ -5,9 +5,10 @@
 
 // TODO remove additional dependencies
 #include "../Opengl/Shader/ShaderProgram.h"
-#include "../Opengl/Texture.h"
+#include "../Opengl/Texture/Texture.h"
 
 class Mesh {
+public:
     Geometry geometry;
     Material material;
 

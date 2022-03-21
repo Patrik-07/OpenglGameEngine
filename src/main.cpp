@@ -1,9 +1,4 @@
-#include "Framework/framework.h"
-#include "resources.h"
-#include "Framework/Utility/Timer.h"
-#include "Framework/Utility/CameraHandler.h"
-#include "Framework/Utility/ImGuiRenderer.h"
-#include <glm/vec3.hpp>
+#include "Framework/Framework.h"
 
 int main(int argc, char** argv) {
     SDL_Window* window;
@@ -11,21 +6,24 @@ int main(int argc, char** argv) {
     ImGuiRenderer imGuiRenderer = init(window, context);
 
     ShaderProgram shaderProgram(
-        RESOURCE::SHADER::VERTEX_SHADER,
-        RESOURCE::SHADER::FRAGMENT_SHADER
+        RESOURCE::SHADER::DEFAULT_VS,
+        RESOURCE::SHADER::DEFAULT_FS
     );
 
     // Load models
-    Model duckModel = Model::load<AssimpLoader>(RESOURCE::MODEL::DUCK);
-    SceneObject duck(duckModel, shaderProgram);
-    duck.rotate(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    Model rpg_character_model = Model::load<AssimpLoader>(RESOURCE::MODEL::RPG_CHARACTER, RESOURCE::MODEL::RPG_CHARACTER_BONES);
+//    Model a = Model::load<AssimpLoader>(RESOURCE::MODEL::RPG_CHARACTER_BONES);
+
+    SceneObject rpg_character(rpg_character_model, shaderProgram);
+    rpg_character.scale(glm::vec3(0.02f, 0.02f, 0.02f));
+    rpg_character.rotate(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
     // Create camera
     Camera camera(shaderProgram);
 
     // Init scene
     Scene scene(width, height, camera);
-    scene.addSceneObject(duck);
+    scene.addSceneObject(rpg_character);
 
     Timer timer;
     CameraHandler cameraHandler(camera);
@@ -40,17 +38,13 @@ int main(int argc, char** argv) {
 
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
-            ImGui_ImplSDL2_ProcessEvent(&event);
-            if (event.type == SDL_QUIT)
-                isRunning = false;
-            if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(window))
-                isRunning = false;
+            isRunning = processEvent(event);
 
             if (event.type == SDL_WINDOWEVENT) {
                 if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
                     SDL_GetWindowSize(window, &width, &height);
                     scene.resize(width, height);
-                    imGuiRenderer.resize(scene.width, scene.height);
+                    imGuiRenderer.resize(width, height);
                 }
             }
         }
