@@ -1,4 +1,5 @@
 #include "VertexBuffer.h"
+#include "../../Model/Vertex.h"
 
 VertexBuffer::VertexBuffer(const void* vertices, size_t size) : Buffer() {
     glGenBuffers(1, &ID);
@@ -22,15 +23,17 @@ void VertexBuffer::setLayout(std::initializer_list<VertexAttribute> layout) cons
 
         size_t size = va.size * sizeof(types.at(va.type));
 
-        stride += size;
+//        stride += size;
         offset[i + 1] = offset[i] + size;
     }
+    stride = sizeof(Vertex);
 
     for (int i = 0; i < attributes.size(); i++) {
         VertexAttribute va = attributes[i];
 
-        glVertexAttribPointer(i, va.size, va.type, GL_FALSE, stride, (void*)offset[i]);
-        glEnableVertexAttribArray(i);
+        int location = va.location != -1 ? va.location : i;
+        glVertexAttribPointer(location, va.size, va.type, GL_FALSE, stride, (void*)offset[i]);
+        glEnableVertexAttribArray(location);
     }
 }
 

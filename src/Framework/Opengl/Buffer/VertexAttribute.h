@@ -6,8 +6,9 @@ class VertexAttribute {
 public:
     const unsigned int size;
     const GLenum type;
+    const int location;
 
-    VertexAttribute(GLenum type, unsigned int size);
+    VertexAttribute(GLenum type, unsigned int size, int location = -1);
 
     static constexpr const unsigned int BYTE =  GL_BYTE;
     static constexpr const unsigned int UNSIGNED_BYTE = GL_UNSIGNED_BYTE;

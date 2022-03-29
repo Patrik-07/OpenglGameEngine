@@ -11,19 +11,16 @@ int main(int argc, char** argv) {
     );
 
     // Load models
-    Model rpg_character_model = Model::load<AssimpLoader>(RESOURCE::MODEL::RPG_CHARACTER, RESOURCE::MODEL::RPG_CHARACTER_BONES);
-//    Model a = Model::load<AssimpLoader>(RESOURCE::MODEL::RPG_CHARACTER_BONES);
-
-    SceneObject rpg_character(rpg_character_model, shaderProgram);
-    rpg_character.scale(glm::vec3(0.02f, 0.02f, 0.02f));
-    rpg_character.rotate(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    Model model = Model::load<AssimpLoader>(RESOURCE::MODEL::FOX);
+    SceneObject object(model, shaderProgram);
+    object.scale(glm::vec3(0.05f, 0.05f, 0.05f));
 
     // Create camera
     Camera camera(shaderProgram);
 
     // Init scene
     Scene scene(width, height, camera);
-    scene.addSceneObject(rpg_character);
+    scene.addSceneObject(object);
 
     Timer timer;
     CameraHandler cameraHandler(camera);

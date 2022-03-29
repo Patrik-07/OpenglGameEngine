@@ -8,7 +8,15 @@ namespace RESOURCE {
 
     namespace MODEL {
         const char* DUCK = R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\duck\10602_Rubber_Duck_v1_L3.obj)";
-        const char* RPG_CHARACTER = R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\Models\rpg_character\RPG Character Mecanim Animation Pack FREE\Models\Characters\untitled.fbx)";
-        const char* RPG_CHARACTER_BONES = R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\Models\rpg_character\RPG Character Mecanim Animation Pack FREE\Models\Characters\RPG-Character-Bones.FBX)";
+        const char* FOX = R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\models\fox\Fox.gltf)";
+
+        namespace RPG_CHARACTER {
+            const char* MODEL = R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\Models\rpg_character\RPG Character Mecanim Animation Pack FREE\Models\Characters\untitled.fbx)";
+            const char* BONES = R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\Models\rpg_character\RPG Character Mecanim Animation Pack FREE\Models\Characters\RPG-Character-Bones.FBX)";
+
+            namespace ANIMATION {
+                const char* RUN = R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\Models\rpg_character\RPG Character Mecanim Animation Pack FREE\Animations\Unarmed\RPG-Character@Unarmed-Run-Forward.FBX)";
+            }
+        }
     }
 }

@@ -1,14 +1,17 @@
 #include "Geometry.h"
 
-Geometry::Geometry(const std::vector<Vertex>& vertices, const std::vector<unsigned int> &indices) {
+Geometry::Geometry(const std::vector<Vertex>& vertices, const std::vector<unsigned int> &indices, const std::map<std::string, VertexBoneData>& boneData) {
     this->vertices = vertices;
     this->indices = indices;
+    this->boneData = boneData;
 
     VertexBuffer vertexBuffer = VertexBuffer::create(&this->vertices[0], this->vertices.size() * sizeof(Vertex));
     vertexBuffer.setLayout({
        { VertexAttribute::FLOAT, 3 },
        { VertexAttribute::FLOAT, 3 },
-       { VertexAttribute::FLOAT, 2 }
+       { VertexAttribute::FLOAT, 2 },
+       { VertexAttribute::INT, 4 },
+       { VertexAttribute::FLOAT, 4 },
     });
     vertexBuffer.unbind();
 

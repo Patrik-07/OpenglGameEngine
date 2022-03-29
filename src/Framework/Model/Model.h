@@ -14,9 +14,9 @@ public:
     Model(const std::vector<Mesh>& meshes);
 
     template<class ModelLoader>
-    static Model load(const char* modelPath, const char* bonePath = "") {
+    static Model load(const char* modelPath) {
         ModelLoader loader;
-        return loader.load(modelPath, bonePath);
+        return loader.load(modelPath);
     }
 
     void draw(ShaderProgram& shaderProgram) const;

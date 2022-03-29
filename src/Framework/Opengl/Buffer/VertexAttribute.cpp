@@ -1,3 +1,3 @@
 #include "VertexAttribute.h"
 
-VertexAttribute::VertexAttribute(GLenum type, unsigned int size) : type(type), size(size) {}
+VertexAttribute::VertexAttribute(GLenum type, unsigned int size, int location) : type(type), size(size), location(location) {}

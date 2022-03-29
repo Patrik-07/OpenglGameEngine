@@ -2,38 +2,22 @@
 
 #include "../Opengl/Texture/Texture.h"
 #include "../Model/Mesh.h"
+#include "../Model/VertexBoneData.h"
 
-Model AssimpLoader::load(const std::string& modelPath, const std::string& bonePath = "") {
+Model AssimpLoader::load(const std::string& modelPath) {
     directory = "";
     loadedTextures.clear();
 
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(modelPath, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
 
-    if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-        std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
-    }
-
     directory = modelPath.substr(0, modelPath.find_last_of('\\'));
-
+    std::cout << scene->mNumAnimations;
     aiNode *node = scene->mRootNode;
 
     processNode(node, scene);
 
-//    if (bonePath != "") {
-//        processBones(node, scene);
-//    }
-
     return {meshes};
-}
-
-void AssimpLoader::processBones(aiNode *node, const aiScene *scene) {
-    for (int i = 0; i < node->mNumMeshes; i++) {
-        aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        for (int j = 0; j < mesh->mNumBones; j++) {
-            aiBone* bone = mesh->mBones[i];
-        }
-    }
 }
 
 void AssimpLoader::processNode(aiNode *node, const aiScene *scene) {
@@ -57,16 +41,42 @@ Mesh AssimpLoader::processMesh(aiMesh *mesh, const aiScene *scene) {
 }
 
 Geometry AssimpLoader::processGeometry(aiMesh *mesh) {
-    std::vector<Vertex> vertices;
-    std::vector<unsigned int> indices;
+    std::vector<Vertex> vertices = processVertices(mesh);
+    std::vector<unsigned int> indices = processIndices(mesh);
 
-    auto verticesFuture = std::async(std::launch::deferred, processVertices, mesh);
-    auto indicesFuture = std::async(std::launch::deferred, processIndices, mesh);
+    std::map<std::string, VertexBoneData> boneDataMap;
+    unsigned int boneCount = 0;
 
-    vertices = verticesFuture.get();
-    indices = indicesFuture.get();
+    if (mesh->HasBones()) {
+        for (int i = 0; i < mesh->mNumBones; i++) {
+            std::string boneName = mesh->mBones[i]->mName.C_Str();
+            if (boneDataMap.find(boneName) == boneDataMap.end()) {
+                aiMatrix4x4 m = mesh->mBones[i]->mOffsetMatrix;
+                glm::mat4 offsetMatrix(
+                        m.a1, m.a2, m.a3, m.a4,
+                        m.b1, m.b2, m.b3, m.b4,
+                        m.c1, m.c2, m.c3, m.c4,
+                        m.d1, m.d2, m.d3, m.d4
+                );
+                boneDataMap[boneName] = VertexBoneData{boneCount++, offsetMatrix};
+            }
 
-    return {vertices, indices};
+            auto weights = mesh->mBones[i]->mWeights;
+            int numWeights = mesh->mBones[i]->mNumWeights;
+            for (int j = 0; j < numWeights; j++) {
+                unsigned int vertexID = weights[j].mVertexId;
+                Vertex& v = vertices[vertexID];
+                for (int k = 0; k < 4; k++) {
+                    if (v.boneIDs[k] < 0) {
+                        v.boneIDs[k] = i;
+                        v.weights[k] = weights[j].mWeight;
+                    }
+                }
+            }
+        }
+    }
+
+    return {vertices, indices, boneDataMap};
 }
 
 Material AssimpLoader::processMaterial(aiMesh *mesh, const aiScene *scene) {
@@ -88,8 +98,15 @@ Material AssimpLoader::processMaterial(aiMesh *mesh, const aiScene *scene) {
 
 std::vector<Vertex> AssimpLoader::processVertices(aiMesh *mesh) {
     std::vector<Vertex> vertices;
+
     for (int i = 0; i < mesh->mNumVertices; i++) {
         Vertex vertex{};
+
+        if (mesh->HasBones()) {
+            for (int j = 0; j < 4; j++) {
+                vertex.boneIDs[j] = -1;
+            }
+        }
 
         vertex.position = glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
 
@@ -103,6 +120,7 @@ std::vector<Vertex> AssimpLoader::processVertices(aiMesh *mesh) {
 
         vertices.push_back(vertex);
     }
+
     return vertices;
 }
 
@@ -123,10 +141,7 @@ std::vector<Texture> AssimpLoader::processTexturesByType(aiMaterial *material, a
         aiString relativePath;
         material->GetTexture(aiType, i, &relativePath);
 
-//        std::cout << relativePath.C_Str() << std::endl;
-
         std::string path = directory + '\\' + relativePath.C_Str();
-        path = R"(C:\Users\PatrikSanta\Prog\C++\Imgui\src\Models\rpg_character\RPG Character Mecanim Animation Pack FREE\Textures\RPG-Character.psd)";
 
         bool hasTexture = false;
         for (auto & loadedTexture : loadedTextures) {
