@@ -1,9 +1,6 @@
 #pragma once
 
 struct VertexBoneData {
-
-    unsigned int vertexID;
-
-    // model to bone space
-    glm::mat4 offsetMatrix;
+    int vertexID;
+    glm::mat4 offsetMatrix; // model to bone space
 };

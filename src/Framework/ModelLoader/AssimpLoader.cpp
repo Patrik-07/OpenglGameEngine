@@ -12,26 +12,28 @@ Model AssimpLoader::load(const std::string& modelPath) {
     const aiScene* scene = importer.ReadFile(modelPath, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
 
     directory = modelPath.substr(0, modelPath.find_last_of('\\'));
-    std::cout << scene->mNumAnimations;
+
     aiNode *node = scene->mRootNode;
 
     processNode(node, scene);
 
-    return {meshes};
+    return {meshes, boneDataMap};
 }
 
 void AssimpLoader::processNode(aiNode *node, const aiScene *scene) {
     for (int i = 0; i < node->mNumMeshes; i++) {
         aiMesh* aiMesh = scene->mMeshes[node->mMeshes[i]];
-        std::cout << aiMesh->mNumBones << std::endl;
 
         Mesh mesh = processMesh(aiMesh, scene);
         meshes.push_back(mesh);
     }
+
     for (int i = 0; i < node->mNumChildren; i++) {
         processNode(node->mChildren[i], scene);
     }
 }
+
+
 
 Mesh AssimpLoader::processMesh(aiMesh *mesh, const aiScene *scene) {
     Geometry geometry = processGeometry(mesh);
@@ -44,39 +46,45 @@ Geometry AssimpLoader::processGeometry(aiMesh *mesh) {
     std::vector<Vertex> vertices = processVertices(mesh);
     std::vector<unsigned int> indices = processIndices(mesh);
 
-    std::map<std::string, VertexBoneData> boneDataMap;
-    unsigned int boneCount = 0;
-
+    // extract into a new function: processBones
     if (mesh->HasBones()) {
         for (int i = 0; i < mesh->mNumBones; i++) {
+            int boneID = -1;
             std::string boneName = mesh->mBones[i]->mName.C_Str();
             if (boneDataMap.find(boneName) == boneDataMap.end()) {
                 aiMatrix4x4 m = mesh->mBones[i]->mOffsetMatrix;
                 glm::mat4 offsetMatrix(
-                        m.a1, m.a2, m.a3, m.a4,
-                        m.b1, m.b2, m.b3, m.b4,
-                        m.c1, m.c2, m.c3, m.c4,
-                        m.d1, m.d2, m.d3, m.d4
+                    m.a1, m.a2, m.a3, m.a4,
+                    m.b1, m.b2, m.b3, m.b4,
+                    m.c1, m.c2, m.c3, m.c4,
+                    m.d1, m.d2, m.d3, m.d4
                 );
-                boneDataMap[boneName] = VertexBoneData{boneCount++, offsetMatrix};
+                boneID = boneCount;
+                boneDataMap[boneName] = VertexBoneData{boneID, offsetMatrix};
+                boneCount++;
+            } else {
+                boneID = boneDataMap[boneName].vertexID;
             }
 
             auto weights = mesh->mBones[i]->mWeights;
             int numWeights = mesh->mBones[i]->mNumWeights;
+
             for (int j = 0; j < numWeights; j++) {
                 unsigned int vertexID = weights[j].mVertexId;
+                float weight = weights[j].mWeight;
+
                 Vertex& v = vertices[vertexID];
                 for (int k = 0; k < 4; k++) {
                     if (v.boneIDs[k] < 0) {
-                        v.boneIDs[k] = i;
-                        v.weights[k] = weights[j].mWeight;
+                        v.boneIDs[k] = boneID;
+                        v.weights[k] = weight;
                     }
                 }
             }
         }
     }
 
-    return {vertices, indices, boneDataMap};
+    return {vertices, indices};
 }
 
 Material AssimpLoader::processMaterial(aiMesh *mesh, const aiScene *scene) {
@@ -101,11 +109,8 @@ std::vector<Vertex> AssimpLoader::processVertices(aiMesh *mesh) {
 
     for (int i = 0; i < mesh->mNumVertices; i++) {
         Vertex vertex{};
-
-        if (mesh->HasBones()) {
-            for (int j = 0; j < 4; j++) {
-                vertex.boneIDs[j] = -1;
-            }
+        for (int j = 0; j < 4; j++) {
+            vertex.boneIDs[j] = -1;
         }
 
         vertex.position = glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
@@ -164,3 +169,5 @@ std::vector<Texture> AssimpLoader::processTexturesByType(aiMaterial *material, a
 std::vector<Mesh> AssimpLoader::meshes;
 std::string AssimpLoader::directory;
 std::vector<Texture> AssimpLoader::loadedTextures;
+std::map<std::string, VertexBoneData> AssimpLoader::boneDataMap;
+int AssimpLoader::boneCount = 0;

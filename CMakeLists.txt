@@ -99,6 +99,6 @@ add_executable(Imgui
     src/Framework/Opengl/Buffer/FramerBuffer.h
     src/Framework/Utility/Window.h
         src/Framework/Model/VertexBoneData.h
-        )
+        src/Framework/Animation/Bone.h src/Framework/Animation/AssimpGLMHelpers.h src/Framework/Animation/Animation.h src/Framework/Animation/Animator.h)
 
 target_link_libraries(Imgui mingw32 opengl32 glew32 SDL2main SDL2 assimp)

@@ -1,9 +1,8 @@
 #include "Geometry.h"
 
-Geometry::Geometry(const std::vector<Vertex>& vertices, const std::vector<unsigned int> &indices, const std::map<std::string, VertexBoneData>& boneData) {
+Geometry::Geometry(const std::vector<Vertex>& vertices, const std::vector<unsigned int> &indices) {
     this->vertices = vertices;
     this->indices = indices;
-    this->boneData = boneData;
 
     VertexBuffer vertexBuffer = VertexBuffer::create(&this->vertices[0], this->vertices.size() * sizeof(Vertex));
     vertexBuffer.setLayout({

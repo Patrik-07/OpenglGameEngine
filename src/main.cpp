@@ -1,4 +1,6 @@
 #include "Framework/Framework.h"
+#include "Framework/Animation/Animation.h"
+#include "Framework/Animation/Animator.h"
 
 int main(int argc, char** argv) {
     SDL_Window* window;
@@ -12,6 +14,9 @@ int main(int argc, char** argv) {
 
     // Load models
     Model model = Model::load<AssimpLoader>(RESOURCE::MODEL::FOX);
+    Animation animation(RESOURCE::MODEL::FOX, model);
+    Animator animator(animation);
+
     SceneObject object(model, shaderProgram);
     object.scale(glm::vec3(0.05f, 0.05f, 0.05f));
 
@@ -51,7 +56,8 @@ int main(int argc, char** argv) {
         // add ImGui commands here
         // ...
 
-        imGuiRenderer.sceneRender(scene);
+        animator.updateAnimation(deltaTime);
+        imGuiRenderer.sceneRender(scene, animator, shaderProgram);
         imGuiRenderer.postRender();
 
         SDL_GL_SwapWindow(window);

@@ -10,7 +10,6 @@
 
 class Scene  {
     std::vector<SceneObject*> objects;
-    Camera& camera;
     Grid grid;
 
 public:
@@ -44,4 +43,6 @@ public:
         }
         camera.update();
     }
+
+    Camera& camera;
 };

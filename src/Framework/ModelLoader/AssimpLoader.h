@@ -10,6 +10,7 @@
 
 #include "ModelLoader.h"
 #include "../Model/VertexBoneData.h"
+#include "../Animation/Animation.h"
 
 class Model;
 class Mesh;
@@ -23,6 +24,8 @@ class AssimpLoader : public ModelLoader {
     static std::vector<Mesh> meshes;
     static std::string directory;
     static std::vector<Texture> loadedTextures;
+    static std::map<std::string, VertexBoneData> boneDataMap;
+    static int boneCount;
 
 public:
     Model load(const std::string& modelPath) override;
@@ -33,8 +36,6 @@ private:
 
     static Geometry processGeometry(aiMesh* mesh);
     static Material processMaterial(aiMesh* mesh, const aiScene* scene);
-
-    static VertexBoneData processBone(aiVertexWeight boneData);
 
     static std::vector<Vertex> processVertices(aiMesh* mesh);
     static std::vector<unsigned int> processIndices(aiMesh* mesh);

@@ -7,6 +7,7 @@
 #include "SDL2/SDL.h"
 #include "../Opengl/Buffer/FramerBuffer.h"
 #include "../Scene/Scene.h"
+#include "../Animation/Animator.h"
 
 class ImGuiRenderer {
     ImGuiIO* io;
@@ -49,7 +50,7 @@ public:
         ImGui::DockSpaceOverViewport();
     }
 
-    void sceneRender(Scene& scene) {
+    void sceneRender(Scene& scene, Animator& animator, ShaderProgram& shaderProgram) {
         frameBuffer.bind();
 
         glViewport(0, 0, scene.width, scene.height);
@@ -57,6 +58,12 @@ public:
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         scene.update();
+
+        auto poses = animator.getPoses();
+        for (int i = 0; i < poses.size(); ++i) {
+            shaderProgram.setUniform("poses[" + std::to_string(i) + "]", glm::value_ptr(poses[i]));
+        }
+
         scene.draw();
 
         frameBuffer.unbind();
