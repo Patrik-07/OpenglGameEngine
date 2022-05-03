@@ -1440,7 +1440,7 @@ extern DECLSPEC const SDL_Rect * SDLCALL SDL_GetWindowMouseRect(SDL_Window * win
  * display.
  *
  * Many platforms will refuse to set the display brightness in modern times.
- * You are better off using a Shader to adjust gamma during rendering, or
+ * You are better off using a shader to adjust gamma during rendering, or
  * something similar.
  *
  * \param window the window used to select the display whose brightness will

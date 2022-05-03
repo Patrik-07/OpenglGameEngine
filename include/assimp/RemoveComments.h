@@ -70,7 +70,7 @@ public:
     //! Remove single-line comments. The end of a line is
     //! expected to be either NL or CR or NLCR.
     //! \param szComment The start sequence of the comment, e.g. "//"
-    //! \param szBuffer Buffer to work with
+    //! \param szBuffer buffer to work with
     //! \param chReplacement Character to be used as replacement
     //! for commented lines. By default this is ' '
     static void RemoveLineComments(const char* szComment,
@@ -81,7 +81,7 @@ public:
     //! may not be nested (as in C).
     //! \param szCommentStart The start sequence of the comment, e.g. "/*"
     //! \param szCommentEnd The end sequence of the comment, e.g. "*/"
-    //! \param szBuffer Buffer to work with
+    //! \param szBuffer buffer to work with
     //! \param chReplacement Character to be used as replacement
     //! for commented lines. By default this is ' '
     static void RemoveMultiLineComments(const char* szCommentStart,

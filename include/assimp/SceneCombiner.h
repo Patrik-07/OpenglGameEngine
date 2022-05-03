@@ -150,7 +150,7 @@ struct BoneWithHash : public std::pair<uint32_t, aiString *> {
 };
 
 // ---------------------------------------------------------------------------
-/** @brief Utility for SceneCombiner
+/** @brief utility for SceneCombiner
  */
 struct SceneHelper {
     SceneHelper() :

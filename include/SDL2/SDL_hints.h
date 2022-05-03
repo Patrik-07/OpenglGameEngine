@@ -1128,13 +1128,13 @@ extern "C" {
 #define SDL_HINT_RENDER_LOGICAL_SIZE_MODE       "SDL_RENDER_LOGICAL_SIZE_MODE"
 
 /**
- *  \brief  A variable controlling whether the OpenGL render driver uses Shaders if they are available.
+ *  \brief  A variable controlling whether the OpenGL render driver uses shaders if they are available.
  *
  *  This variable can be set to the following values:
- *    "0"       - Disable Shaders
- *    "1"       - Enable Shaders
+ *    "0"       - Disable shaders
+ *    "1"       - Enable shaders
  *
- *  By default Shaders are used if OpenGL supports them.
+ *  By default shaders are used if OpenGL supports them.
  */
 #define SDL_HINT_RENDER_OPENGL_SHADERS      "SDL_RENDER_OPENGL_SHADERS"
 
@@ -1407,12 +1407,12 @@ extern "C" {
 #define SDL_HINT_VIDEO_WINDOW_SHARE_PIXEL_FORMAT    "SDL_VIDEO_WINDOW_SHARE_PIXEL_FORMAT"
 
 /**
-*  \brief  A variable specifying which Shader compiler to preload when using the Chrome ANGLE binaries
+*  \brief  A variable specifying which shader compiler to preload when using the Chrome ANGLE binaries
 *
 *  SDL has EGL and OpenGL ES2 support on Windows via the ANGLE project. It
 *  can use two different sets of binaries, those compiled by the user from source
 *  or those provided by the Chrome browser. In the later case, these binaries require
-*  that SDL loads a DLL providing the Shader compiler.
+*  that SDL loads a DLL providing the shader compiler.
 *
 *  This variable can be set to the following values:
 *    "d3dcompiler_46.dll" - default, best for Vista or later.

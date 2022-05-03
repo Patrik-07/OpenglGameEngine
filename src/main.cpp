@@ -1,6 +1,6 @@
-#include "Framework/Framework.h"
-#include "Framework/Animation/Animation.h"
-#include "Framework/Animation/Animator.h"
+#include "framework/Framework.h"
+#include "framework/animation/Animation.h"
+#include "framework/animation/Animator.h"
 
 int main(int argc, char** argv) {
     SDL_Window* window;
@@ -12,9 +12,19 @@ int main(int argc, char** argv) {
         RESOURCE::SHADER::DEFAULT_FS
     );
 
+    /*
+        modelLoader modelLoader = AssimpLoader()
+        AnimatedModel m;
+        modelLoader.loadAnimated(RESOURCE::MODEL::FOX);
+    */
+
     // Load models
-    Model model = Model::load<AssimpLoader>(RESOURCE::MODEL::FOX);
-    Animation animation(RESOURCE::MODEL::FOX, model);
+    // change this to: modelLoader.load()
+    AssimpLoader modelLoader = AssimpLoader();
+    Model model = modelLoader.load(RESOURCE::MODEL::FOX);
+
+    Animation animation(RESOURCE::MODEL::FOX, &model);
+
     Animator animator(animation);
 
     SceneObject object(model, shaderProgram);

@@ -95,8 +95,8 @@ typedef enum
     SDL_SYSWMEVENT,             /**< System specific event */
 
     /* Keyboard events */
-    SDL_KEYDOWN        = 0x300, /**< Key pressed */
-    SDL_KEYUP,                  /**< Key released */
+    SDL_KEYDOWN        = 0x300, /**< Keyframe pressed */
+    SDL_KEYUP,                  /**< Keyframe released */
     SDL_TEXTEDITING,            /**< Keyboard text editing (composition) */
     SDL_TEXTINPUT,              /**< Keyboard text input */
     SDL_KEYMAPCHANGED,          /**< Keymap changed due to a system event such as an

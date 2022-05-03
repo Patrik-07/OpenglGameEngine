@@ -41,7 +41,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 /** @file  TinyFormatter.h
- *  @brief Utility to format log messages more easily. Introduced
+ *  @brief utility to format log messages more easily. Introduced
  *    to get rid of the boost::format dependency. Much slinker,
  *    basically just extends stringstream.
  */

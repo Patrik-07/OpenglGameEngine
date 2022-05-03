@@ -105,89 +105,89 @@ build CMakeFiles/Imgui.dir/include/imgui/sdl_opengl3/imgui_impl_sdl.cpp.obj: CXX
   OBJECT_DIR = CMakeFiles\Imgui.dir
   OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\include\imgui\sdl_opengl3
 
-build CMakeFiles/Imgui.dir/src/Framework/Opengl/Buffer/VertexBuffer.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Opengl/Buffer/VertexBuffer.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Opengl\Buffer\VertexBuffer.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/opengl/buffer/VertexBuffer.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/opengl/buffer/VertexBuffer.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\opengl\buffer\VertexBuffer.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Opengl\Buffer
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\opengl\buffer
 
-build CMakeFiles/Imgui.dir/src/Framework/Opengl/Buffer/VertexAttribute.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Opengl/Buffer/VertexAttribute.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Opengl\Buffer\VertexAttribute.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/opengl/buffer/VertexAttribute.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/opengl/buffer/VertexAttribute.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\opengl\buffer\VertexAttribute.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Opengl\Buffer
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\opengl\buffer
 
-build CMakeFiles/Imgui.dir/src/Framework/Opengl/Buffer/ElementBuffer.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Opengl/Buffer/ElementBuffer.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Opengl\Buffer\ElementBuffer.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/opengl/buffer/ElementBuffer.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/opengl/buffer/ElementBuffer.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\opengl\buffer\ElementBuffer.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Opengl\Buffer
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\opengl\buffer
 
-build CMakeFiles/Imgui.dir/src/Framework/Opengl/Buffer/VertexArray.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Opengl/Buffer/VertexArray.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Opengl\Buffer\VertexArray.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/opengl/buffer/VertexArray.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/opengl/buffer/VertexArray.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\opengl\buffer\VertexArray.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Opengl\Buffer
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\opengl\buffer
 
-build CMakeFiles/Imgui.dir/src/Framework/Model/Geometry.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Model/Geometry.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Model\Geometry.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/model/Geometry.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/model/Geometry.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\model\Geometry.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Model
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\model
 
-build CMakeFiles/Imgui.dir/src/Framework/Opengl/Shader/Shader.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Opengl/Shader/Shader.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Opengl\Shader\Shader.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/opengl/shader/Shader.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/opengl/shader/Shader.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\opengl\shader\Shader.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Opengl\Shader
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\opengl\shader
 
-build CMakeFiles/Imgui.dir/src/Framework/Opengl/Shader/ShaderProgram.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Opengl/Shader/ShaderProgram.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Opengl\Shader\ShaderProgram.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/opengl/shader/ShaderProgram.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/opengl/shader/ShaderProgram.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\opengl\shader\ShaderProgram.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Opengl\Shader
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\opengl\shader
 
-build CMakeFiles/Imgui.dir/src/Framework/Model/Mesh.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Model/Mesh.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Model\Mesh.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/model/Mesh.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/model/Mesh.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\model\Mesh.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Model
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\model
 
-build CMakeFiles/Imgui.dir/src/Framework/Model/Material.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Model/Material.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Model\Material.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/model/Material.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/model/Material.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\model\Material.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Model
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\model
 
-build CMakeFiles/Imgui.dir/src/Framework/Opengl/Texture/Texture.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Opengl/Texture/Texture.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Opengl\Texture\Texture.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/opengl/Texture/Texture.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/opengl/Texture/Texture.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\opengl\Texture\Texture.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Opengl\Texture
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\opengl\Texture
 
-build CMakeFiles/Imgui.dir/src/Framework/Model/Model.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/Model/Model.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\Model\Model.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/model/Model.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/model/Model.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\model\Model.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\Model
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\model
 
-build CMakeFiles/Imgui.dir/src/Framework/ModelLoader/AssimpLoader.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/Framework/ModelLoader/AssimpLoader.cpp || cmake_object_order_depends_target_Imgui
-  DEP_FILE = CMakeFiles\Imgui.dir\src\Framework\ModelLoader\AssimpLoader.cpp.obj.d
+build CMakeFiles/Imgui.dir/src/framework/loader/modelLoader/AssimpLoader.cpp.obj: CXX_COMPILER__Imgui_Release C$:/Users/PatrikSanta/Prog/C++/Imgui/src/framework/loader/modelLoader/AssimpLoader.cpp || cmake_object_order_depends_target_Imgui
+  DEP_FILE = CMakeFiles\Imgui.dir\src\framework\loader\modelLoader\AssimpLoader.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu++17
   INCLUDES = -IC:/Users/PatrikSanta/Prog/C++/Imgui/include
   OBJECT_DIR = CMakeFiles\Imgui.dir
-  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\Framework\ModelLoader
+  OBJECT_FILE_DIR = CMakeFiles\Imgui.dir\src\framework\loader\modelLoader
 
 
 # =============================================================================
@@ -197,7 +197,7 @@ build CMakeFiles/Imgui.dir/src/Framework/ModelLoader/AssimpLoader.cpp.obj: CXX_C
 #############################################
 # Link the executable Imgui.exe
 
-build Imgui.exe: CXX_EXECUTABLE_LINKER__Imgui_Release CMakeFiles/Imgui.dir/src/main.cpp.obj CMakeFiles/Imgui.dir/include/imgui/imgui.cpp.obj CMakeFiles/Imgui.dir/include/imgui/imgui_demo.cpp.obj CMakeFiles/Imgui.dir/include/imgui/imgui_draw.cpp.obj CMakeFiles/Imgui.dir/include/imgui/imgui_tables.cpp.obj CMakeFiles/Imgui.dir/include/imgui/imgui_widgets.cpp.obj CMakeFiles/Imgui.dir/include/imgui/sdl_opengl3/imgui_impl_opengl3.cpp.obj CMakeFiles/Imgui.dir/include/imgui/sdl_opengl3/imgui_impl_sdl.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Opengl/Buffer/VertexBuffer.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Opengl/Buffer/VertexAttribute.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Opengl/Buffer/ElementBuffer.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Opengl/Buffer/VertexArray.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Model/Geometry.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Opengl/Shader/Shader.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Opengl/Shader/ShaderProgram.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Model/Mesh.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Model/Material.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Opengl/Texture/Texture.cpp.obj CMakeFiles/Imgui.dir/src/Framework/Model/Model.cpp.obj CMakeFiles/Imgui.dir/src/Framework/ModelLoader/AssimpLoader.cpp.obj
+build Imgui.exe: CXX_EXECUTABLE_LINKER__Imgui_Release CMakeFiles/Imgui.dir/src/main.cpp.obj CMakeFiles/Imgui.dir/include/imgui/imgui.cpp.obj CMakeFiles/Imgui.dir/include/imgui/imgui_demo.cpp.obj CMakeFiles/Imgui.dir/include/imgui/imgui_draw.cpp.obj CMakeFiles/Imgui.dir/include/imgui/imgui_tables.cpp.obj CMakeFiles/Imgui.dir/include/imgui/imgui_widgets.cpp.obj CMakeFiles/Imgui.dir/include/imgui/sdl_opengl3/imgui_impl_opengl3.cpp.obj CMakeFiles/Imgui.dir/include/imgui/sdl_opengl3/imgui_impl_sdl.cpp.obj CMakeFiles/Imgui.dir/src/framework/opengl/buffer/VertexBuffer.cpp.obj CMakeFiles/Imgui.dir/src/framework/opengl/buffer/VertexAttribute.cpp.obj CMakeFiles/Imgui.dir/src/framework/opengl/buffer/ElementBuffer.cpp.obj CMakeFiles/Imgui.dir/src/framework/opengl/buffer/VertexArray.cpp.obj CMakeFiles/Imgui.dir/src/framework/model/Geometry.cpp.obj CMakeFiles/Imgui.dir/src/framework/opengl/shader/Shader.cpp.obj CMakeFiles/Imgui.dir/src/framework/opengl/shader/ShaderProgram.cpp.obj CMakeFiles/Imgui.dir/src/framework/model/Mesh.cpp.obj CMakeFiles/Imgui.dir/src/framework/model/Material.cpp.obj CMakeFiles/Imgui.dir/src/framework/opengl/Texture/Texture.cpp.obj CMakeFiles/Imgui.dir/src/framework/model/Model.cpp.obj CMakeFiles/Imgui.dir/src/framework/loader/modelLoader/AssimpLoader.cpp.obj
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = -lmingw32  -lopengl32  -lglew32  -lSDL2main  -lSDL2  -lassimp  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   LINK_PATH = -LC:/Users/PatrikSanta/Prog/C++/Imgui/lib

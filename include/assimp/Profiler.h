@@ -41,7 +41,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 /** @file Profiler.h
- *  @brief Utility to measure the respective runtime of each import step
+ *  @brief utility to measure the respective runtime of each import step
  */
 #pragma once
 #ifndef AI_INCLUDED_PROFILER_H

@@ -709,7 +709,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_R					0x2002
 #define GL_Q					0x2003
 
-/* Utility */
+/* utility */
 #define GL_VENDOR				0x1F00
 #define GL_RENDERER				0x1F01
 #define GL_VERSION				0x1F02
@@ -893,7 +893,7 @@ GLAPI void GLAPIENTRY glHint( GLenum target, GLenum mode );
 
 
 /*
- * Depth Buffer
+ * Depth buffer
  */
 
 GLAPI void GLAPIENTRY glClearDepth( GLclampd depth );
@@ -906,7 +906,7 @@ GLAPI void GLAPIENTRY glDepthRange( GLclampd near_val, GLclampd far_val );
 
 
 /*
- * Accumulation Buffer
+ * Accumulation buffer
  */
 
 GLAPI void GLAPIENTRY glClearAccum( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha );

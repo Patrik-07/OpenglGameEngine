@@ -1798,7 +1798,7 @@ extern DECLSPEC int SDLCALL SDL_RenderFlush(SDL_Renderer * renderer);
  * context, you need to write your own texture-loading methods.
  *
  * Also note that SDL may upload RGB textures as BGR (or vice-versa), and
- * re-order the color channels in the Shaders phase, so the uploaded texture
+ * re-order the color channels in the shaders phase, so the uploaded texture
  * may have swapped color channels.
  *
  * \param texture the texture to bind to the current OpenGL/ES/ES2 context

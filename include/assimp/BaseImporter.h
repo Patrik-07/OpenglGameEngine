@@ -330,7 +330,7 @@ public: // static utilities
     };
 
     // -------------------------------------------------------------------
-    /** Utility for text file loaders which copies the contents of the
+    /** utility for text file loaders which copies the contents of the
      *  file into a memory buffer and converts it to our UTF8
      *  representation.
      *  @param stream Stream to read from.
@@ -344,7 +344,7 @@ public: // static utilities
             TextFileMode mode = FORBID_EMPTY);
 
     // -------------------------------------------------------------------
-    /** Utility function to move a std::vector into a aiScene array
+    /** utility function to move a std::vector into a aiScene array
     *  @param vec The vector to be moved
     *  @param out The output pointer to the allocated array.
     *  @param numOut The output count of elements copied. */
@@ -361,7 +361,7 @@ public: // static utilities
     }
 
     // -------------------------------------------------------------------
-    /** Utility function to move a std::vector of unique_ptrs into a aiScene array
+    /** utility function to move a std::vector of unique_ptrs into a aiScene array
     *  @param vec The vector of unique_ptrs to be moved
     *  @param out The output pointer to the allocated array.
     *  @param numOut The output count of elements copied. */

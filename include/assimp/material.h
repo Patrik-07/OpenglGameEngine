@@ -344,10 +344,10 @@ ASSIMP_API const char *TextureTypeToString(enum aiTextureType in);
  *
  *  The list of shading modes has been taken from Blender.
  *  See Blender documentation for more information. The API does
- *  not distinguish between "specular" and "diffuse" Shaders (thus the
+ *  not distinguish between "specular" and "diffuse" shaders (thus the
  *  specular term for diffuse shading models like Oren-Nayar remains
  *  undefined). <br>
- *  Again, this value is just a hint. Assimp tries to select the Shader whose
+ *  Again, this value is just a hint. Assimp tries to select the shader whose
  *  most common implementation matches the original rendering results of the
  *  3D modeler which wrote a particular model as closely as possible.
  *
@@ -372,7 +372,7 @@ enum aiShadingMode {
 
     /** Toon-Shading per pixel
      *
-     *  Also known as 'comic' Shader.
+     *  Also known as 'comic' shader.
      */
     aiShadingMode_Toon = 0x5,
 
@@ -392,7 +392,7 @@ enum aiShadingMode {
 
     /** CookTorrance-Shading per pixel
      *
-     *  Special Shader for metallic surfaces.
+     *  Special shader for metallic surfaces.
      */
     aiShadingMode_CookTorrance = 0x8,
 
@@ -713,7 +713,7 @@ public:
     /** @brief Retrieve an array of Type values with a specific key
      *  from the material
      *
-     * @param pKey Key to search for. One of the AI_MATKEY_XXX constants.
+     * @param pKey Keyframe to search for. One of the AI_MATKEY_XXX constants.
      * @param type .. set by AI_MATKEY_XXX
      * @param idx .. set by AI_MATKEY_XXX
      * @param pOut Pointer to a buffer to receive the result.
@@ -735,7 +735,7 @@ public:
     /** @brief Retrieve a Type value with a specific key
      *  from the material
      *
-     * @param pKey Key to search for. One of the AI_MATKEY_XXX constants.
+     * @param pKey Keyframe to search for. One of the AI_MATKEY_XXX constants.
     * @param type Specifies the type of the texture to be retrieved (
     *    e.g. diffuse, specular, height map ...)
     * @param idx Index of the texture to be retrieved.
@@ -818,7 +818,7 @@ public:
      *
      *  @param pInput Pointer to input data
      *  @param pSizeInBytes Size of input data
-     *  @param pKey Key/Usage of the property (AI_MATKEY_XXX)
+     *  @param pKey Keyframe/Usage of the property (AI_MATKEY_XXX)
      *  @param type Set by the AI_MATKEY_XXX macro
      *  @param index Set by the AI_MATKEY_XXX macro
      *  @param pType Type information hint */
@@ -834,7 +834,7 @@ public:
      *  material structure
      *
      *  @param pInput Input string
-     *  @param pKey Key/Usage of the property (AI_MATKEY_XXX)
+     *  @param pKey Keyframe/Usage of the property (AI_MATKEY_XXX)
      *  @param type Set by the AI_MATKEY_XXX macro
      *  @param index Set by the AI_MATKEY_XXX macro */
     aiReturn AddProperty(const aiString *pInput,
@@ -846,7 +846,7 @@ public:
     /** @brief Add a property with a given key to the material structure
      *  @param pInput Pointer to the input data
      *  @param pNumValues Number of values in the array
-     *  @param pKey Key/Usage of the property (AI_MATKEY_XXX)
+     *  @param pKey Keyframe/Usage of the property (AI_MATKEY_XXX)
      *  @param type Set by the AI_MATKEY_XXX macro
      *  @param index Set by the AI_MATKEY_XXX macro  */
     template <class TYPE>
@@ -902,7 +902,7 @@ public:
     /** @brief Remove a given key from the list.
      *
      *  The function fails if the key isn't found
-     *  @param pKey Key to be deleted
+     *  @param pKey Keyframe to be deleted
      *  @param type Set by the AI_MATKEY_XXX macro
      *  @param index Set by the AI_MATKEY_XXX macro  */
     aiReturn RemoveProperty(const char *pKey,
@@ -976,7 +976,7 @@ extern "C" {
 
 // Metallic/Roughness Workflow
 // ---------------------------
-// Base RGBA color factor. Will be multiplied by final base color texture values if extant
+// base RGBA color factor. Will be multiplied by final base color texture values if extant
 // Note: Importers may choose to copy this into AI_MATKEY_COLOR_DIFFUSE for compatibility
 // with renderers and formats that do not support Metallic/Roughness PBR
 #define AI_MATKEY_BASE_COLOR "$clr.base", 0, 0
@@ -1025,7 +1025,7 @@ extern "C" {
 // Transmission
 // ------------
 // https://github.com/KhronosGroup/glTF/tree/master/extensions/2.0/Khronos/KHR_materials_transmission
-// Base percentage of light transmitted through the surface. 0.0 = Opaque, 1.0 = Fully transparent
+// base percentage of light transmitted through the surface. 0.0 = Opaque, 1.0 = Fully transparent
 #define AI_MATKEY_TRANSMISSION_FACTOR "$mat.transmission.factor", 0, 0
 // Texture defining percentage of light transmitted through the surface.
 // Multiplied by AI_MATKEY_TRANSMISSION_FACTOR
@@ -1467,7 +1467,7 @@ extern "C" {
 /** @brief Retrieve a material property with a specific key from the material
  *
  * @param pMat Pointer to the input material. May not be NULL
- * @param pKey Key to search for. One of the AI_MATKEY_XXX constants.
+ * @param pKey Keyframe to search for. One of the AI_MATKEY_XXX constants.
  * @param type Specifies the type of the texture to be retrieved (
  *    e.g. diffuse, specular, height map ...)
  * @param index Index of the texture to be retrieved.
@@ -1498,7 +1498,7 @@ ASSIMP_API C_ENUM aiReturn aiGetMaterialProperty(
  * @endcode
  *
  * @param pMat Pointer to the input material. May not be NULL
- * @param pKey Key to search for. One of the AI_MATKEY_XXX constants.
+ * @param pKey Keyframe to search for. One of the AI_MATKEY_XXX constants.
  * @param pOut Pointer to a buffer to receive the result.
  * @param pMax Specifies the size of the given buffer, in float's.
  *        Receives the number of values (not bytes!) read.
@@ -1527,7 +1527,7 @@ ASSIMP_API C_ENUM aiReturn aiGetMaterialFloatArray(
 * @endcode
 *
 * @param pMat Pointer to the input material. May not be NULL
-* @param pKey Key to search for. One of the AI_MATKEY_XXX constants.
+* @param pKey Keyframe to search for. One of the AI_MATKEY_XXX constants.
 * @param pOut Receives the output float.
 * @param type (see the code sample above)
 * @param index (see the code sample above)

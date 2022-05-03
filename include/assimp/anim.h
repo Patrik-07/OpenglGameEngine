@@ -351,7 +351,7 @@ struct aiMeshAnim {
     /** Size of the #mKeys array. Must be 1, at least. */
     unsigned int mNumKeys;
 
-    /** Key frames of the animation. May not be nullptr. */
+    /** Keyframe frames of the animation. May not be nullptr. */
     C_STRUCT aiMeshKey *mKeys;
 
 #ifdef __cplusplus
@@ -379,7 +379,7 @@ struct aiMeshMorphAnim {
     /** Size of the #mKeys array. Must be 1, at least. */
     unsigned int mNumKeys;
 
-    /** Key frames of the animation. May not be nullptr. */
+    /** Keyframe frames of the animation. May not be nullptr. */
     C_STRUCT aiMeshMorphKey *mKeys;
 
 #ifdef __cplusplus
@@ -482,7 +482,7 @@ namespace Assimp {
 
 // ---------------------------------------------------------------------------
 /**
-  * @brief CPP-API: Utility class to simplify interpolations of various data types.
+  * @brief CPP-API: utility class to simplify interpolations of various data types.
   *
   *  The type of interpolation is chosen automatically depending on the
   *  types of the arguments.

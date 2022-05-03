@@ -111,7 +111,7 @@ typedef khronos_ssize_t  GLsizeiptr;
 #define GL_ONE_MINUS_CONSTANT_ALPHA       0x8004
 #define GL_BLEND_COLOR                    0x8005
 
-/* Buffer Objects */
+/* buffer Objects */
 #define GL_ARRAY_BUFFER                   0x8892
 #define GL_ELEMENT_ARRAY_BUFFER           0x8893
 #define GL_ARRAY_BUFFER_BINDING           0x8894
@@ -255,7 +255,7 @@ typedef khronos_ssize_t  GLsizeiptr;
 #define GL_UNSIGNED_SHORT_5_5_5_1         0x8034
 #define GL_UNSIGNED_SHORT_5_6_5           0x8363
 
-/* Shaders */
+/* shaders */
 #define GL_FRAGMENT_SHADER                  0x8B30
 #define GL_VERTEX_SHADER                    0x8B31
 #define GL_MAX_VERTEX_ATTRIBS               0x8869
@@ -375,7 +375,7 @@ typedef khronos_ssize_t  GLsizeiptr;
 #define GL_CLAMP_TO_EDGE                  0x812F
 #define GL_MIRRORED_REPEAT                0x8370
 
-/* Uniform Types */
+/* uniform Types */
 #define GL_FLOAT_VEC2                     0x8B50
 #define GL_FLOAT_VEC3                     0x8B51
 #define GL_FLOAT_VEC4                     0x8B52
@@ -405,17 +405,17 @@ typedef khronos_ssize_t  GLsizeiptr;
 #define GL_IMPLEMENTATION_COLOR_READ_TYPE   0x8B9A
 #define GL_IMPLEMENTATION_COLOR_READ_FORMAT 0x8B9B
 
-/* Shader Source */
+/* shader Source */
 #define GL_COMPILE_STATUS                 0x8B81
 #define GL_INFO_LOG_LENGTH                0x8B84
 #define GL_SHADER_SOURCE_LENGTH           0x8B88
 #define GL_SHADER_COMPILER                0x8DFA
 
-/* Shader Binary */
+/* shader Binary */
 #define GL_SHADER_BINARY_FORMATS          0x8DF8
 #define GL_NUM_SHADER_BINARY_FORMATS      0x8DF9
 
-/* Shader Precision-Specified Types */
+/* shader Precision-Specified Types */
 #define GL_LOW_FLOAT                      0x8DF0
 #define GL_MEDIUM_FLOAT                   0x8DF1
 #define GL_HIGH_FLOAT                     0x8DF2

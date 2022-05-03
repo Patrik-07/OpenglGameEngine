@@ -244,7 +244,7 @@ ASSIMP_API const C_STRUCT aiScene *aiImportFileFromMemoryWithProperties(
  * This is strictly equivalent to calling #aiImportFile()/#aiImportFileEx with the
  * same flags. However, you can use this separate function to inspect the imported
  * scene first to fine-tune your post-processing setup.
- * @param pScene Scene to work on.
+ * @param pScene scene to work on.
  * @param pFlags Provide a bitwise combination of the #aiPostProcessSteps flags.
  * @return A pointer to the post-processed data. Post processing is done in-place,
  *   meaning this is still the same #aiScene which you passed for pScene. However,

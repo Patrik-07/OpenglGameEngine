@@ -56,7 +56,7 @@
  *
  * If you would like a version of SDL without this code, you can build SDL
  * with SDL_HIDAPI_DISABLED defined to 1. You might want to do this for example
- * on iOS or tvOS to avoid a dependency on the CoreBluetooth Framework.
+ * on iOS or tvOS to avoid a dependency on the CoreBluetooth framework.
  */
 
 #ifndef SDL_hidapi_h_
