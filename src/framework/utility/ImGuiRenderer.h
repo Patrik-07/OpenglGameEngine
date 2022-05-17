@@ -13,6 +13,8 @@ class ImGuiRenderer {
     ImGuiIO* io;
     FrameBuffer frameBuffer;
     FrameBuffer depthBuffer;
+    FrameBuffer normalBuffer;
+    FrameBuffer solidBuffer;
     ShaderProgram depthProgram;
 
 public:
@@ -39,11 +41,15 @@ public:
         int w, h;
         SDL_GetWindowSize(window, &w, &h);
         frameBuffer = FrameBuffer::create(w, h);
+        normalBuffer = FrameBuffer::create(w, h);
+        solidBuffer = FrameBuffer::create(w, h);
         depthBuffer = FrameBuffer::create(1024, 1024);
     }
 
     void resize(int w, int h) {
         frameBuffer = FrameBuffer::create(w, h);
+        normalBuffer = FrameBuffer::create(w, h);
+        solidBuffer = FrameBuffer::create(w, h);
     }
 
     void preRender() {
@@ -63,8 +69,8 @@ public:
         glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
         glm::mat4 lightView = glm::lookAt(
                 glm::vec3(-3.0f, 4.0f, -1.0f),
-                glm::vec3( 0.0f, 0.0f,  0.0f),
-                glm::vec3( 0.0f, 1.0f,  0.0f)
+                glm::vec3(3.0f, 0.0f, 0.0f),
+                glm::vec3(0.0f, 1.0f, 0.0f)
         );
         glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
@@ -86,12 +92,11 @@ public:
         glCullFace(GL_BACK);
 
         ImGui::Begin("Depth");
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         ImVec2 pos2 = ImGui::GetCursorScreenPos();
         ImGui::GetWindowDrawList()->AddImage(
                 (void*)depthBuffer.depthID,
                 pos2,
-                ImVec2(pos2.x + (float)scene.width, pos2.y + (float)scene.height),
+                ImVec2(pos2.x + (float)scene.width/2, pos2.y + (float)scene.height/2),
                 ImVec2(0, 1),
                 ImVec2(1, 0)
         );
@@ -110,6 +115,8 @@ public:
         foxShader.setUniform("lightSpaceMatrix", glm::value_ptr(lightSpaceMatrix));
         foxShader.setUniform("viewPos", glm::value_ptr(scene.camera.position), 3);
         foxShader.setUniform("lightPos", glm::value_ptr(glm::vec3(-3.0f, 4.0f, -1.0f)), 3);
+        foxShader.setUniform("enableNormal", false);
+        foxShader.setUniform("enableSolid", false);
         scene.draw();
 
         frameBuffer.unbind();
@@ -124,6 +131,58 @@ public:
             ImVec2(pos1.x + (float)scene.width, pos1.y + (float)scene.height),
             ImVec2(0, 1),
             ImVec2(1, 0)
+        );
+        ImGui::End();
+
+        normalBuffer.bind();
+
+        glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        scene.update(deltaTime, true);
+        foxShader.setUniform("depthMap", depthBuffer.depthID, 1);
+        foxShader.setUniform("lightSpaceMatrix", glm::value_ptr(lightSpaceMatrix));
+        foxShader.setUniform("viewPos", glm::value_ptr(scene.camera.position), 3);
+        foxShader.setUniform("lightPos", glm::value_ptr(glm::vec3(-3.0f, 4.0f, -1.0f)), 3);
+        foxShader.setUniform("enableNormal", true);
+        foxShader.setUniform("enableSolid", false);
+        scene.draw();
+
+        normalBuffer.unbind();
+
+        ImGui::Begin("Normal");
+        ImVec2 pos3 = ImGui::GetCursorScreenPos();
+        ImGui::GetWindowDrawList()->AddImage(
+                (void*)normalBuffer.textureID,
+                pos3,
+                ImVec2(pos3.x + (float)scene.width, pos3.y + (float)scene.height),
+                ImVec2(0, 1),
+                ImVec2(1, 0)
+        );
+        ImGui::End();
+
+        solidBuffer.bind();
+
+        glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        scene.update(deltaTime, true);
+        foxShader.setUniform("depthMap", depthBuffer.depthID, 1);
+        foxShader.setUniform("lightSpaceMatrix", glm::value_ptr(lightSpaceMatrix));
+        foxShader.setUniform("viewPos", glm::value_ptr(scene.camera.position), 3);
+        foxShader.setUniform("lightPos", glm::value_ptr(glm::vec3(-3.0f, 4.0f, -1.0f)), 3);
+        foxShader.setUniform("enableNormal", false);
+        foxShader.setUniform("enableSolid", true);
+        scene.draw();
+
+        solidBuffer.unbind();
+
+        ImGui::Begin("Solid");
+        ImVec2 pos4 = ImGui::GetCursorScreenPos();
+        ImGui::GetWindowDrawList()->AddImage(
+                (void*)solidBuffer.textureID,
+                pos4,
+                ImVec2(pos4.x + (float)scene.width, pos4.y + (float)scene.height),
+                ImVec2(0, 1),
+                ImVec2(1, 0)
         );
         ImGui::End();
     }

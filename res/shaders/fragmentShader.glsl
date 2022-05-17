@@ -14,6 +14,8 @@ out vec4 FragColor;
 
 //uniform Material material;
 uniform bool enableTexture;
+uniform bool enableNormal;
+uniform bool enableSolid;
 
 uniform sampler2D diffuseMap;
 uniform sampler2D depthMap;
@@ -59,10 +61,16 @@ void main() {
         vec3 specular = spec * lightColor;
 
         // shadow
-        float bias = max(0.05f * (1.0f - dot(normal, lightDir)), 0.045f);
+        float bias = max(0.05f * (1.0f - dot(normal, lightDir)), 0.025f);
         float shadow = ShadowCalculation(fragmentShaderIn.fragPosLightSpace, bias);
         vec3 lighting = (ambient + shadow * (diffuse + specular)) * color;
 
-        FragColor = vec4(lighting, 1.0f);
+        if (enableNormal) {
+            FragColor = vec4(normal, 1.0f);
+        } else if (enableSolid) {
+            FragColor = vec4(color, 1.0f);
+        } else {
+            FragColor = vec4(lighting, 1.0f);
+        }
     } else FragColor = vec4(0.83f, 0.36f, 0.36f, 1.0f);
 }
