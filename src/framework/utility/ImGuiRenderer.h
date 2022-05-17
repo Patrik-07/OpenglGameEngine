@@ -12,9 +12,11 @@
 class ImGuiRenderer {
     ImGuiIO* io;
     FrameBuffer frameBuffer;
+    FrameBuffer depthBuffer;
+    ShaderProgram depthProgram;
 
 public:
-    ImGuiRenderer(SDL_Window*& window, SDL_GLContext& context) {
+    ImGuiRenderer(SDL_Window*& window, SDL_GLContext& context) : depthProgram(RESOURCE::SHADER::DEPTH_VS, RESOURCE::SHADER::DEPTH_FS) {
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         io = &ImGui::GetIO();
@@ -37,6 +39,7 @@ public:
         int w, h;
         SDL_GetWindowSize(window, &w, &h);
         frameBuffer = FrameBuffer::create(w, h);
+        depthBuffer = FrameBuffer::create(1024, 1024);
     }
 
     void resize(int w, int h) {
@@ -50,32 +53,75 @@ public:
         ImGui::DockSpaceOverViewport();
     }
 
-    void sceneRender(Scene& scene, Animator& animator, ShaderProgram& shaderProgram) {
-        frameBuffer.bind();
+    void sceneRender(Scene& scene, float deltaTime) {
+        // Depth buffer
+        glViewport(0, 0, 1024, 1024);
+        glCullFace(GL_FRONT);
+        depthBuffer.bind();
 
-        glViewport(0, 0, scene.width, scene.height);
+        float near_plane = 1.0f, far_plane = 7.5f;
+        glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+        glm::mat4 lightView = glm::lookAt(
+                glm::vec3(-3.0f, 4.0f, -1.0f),
+                glm::vec3( 0.0f, 0.0f,  0.0f),
+                glm::vec3( 0.0f, 1.0f,  0.0f)
+        );
+        glm::mat4 lightSpaceMatrix = lightProjection * lightView;
+
+        glm::mat4 v = scene.camera.viewMatrix;
+        glm::mat4 p = scene.camera.projectionMatrix;
+
+        scene.camera.viewMatrix = lightView;
+        scene.camera.projectionMatrix = lightProjection;
+
         glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        scene.update(deltaTime, false);
+        scene.draw();
 
-        scene.update();
+        scene.camera.viewMatrix = v;
+        scene.camera.projectionMatrix = p;
 
-        auto poses = animator.getPoses();
-        for (int i = 0; i < poses.size(); i++) {
-            shaderProgram.setUniform("poses[" + std::to_string(i) + "]", glm::value_ptr(poses[i]));
-        }
+        depthBuffer.unbind();
+        glCullFace(GL_BACK);
 
+        ImGui::Begin("Depth");
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImVec2 pos2 = ImGui::GetCursorScreenPos();
+        ImGui::GetWindowDrawList()->AddImage(
+                (void*)depthBuffer.depthID,
+                pos2,
+                ImVec2(pos2.x + (float)scene.width, pos2.y + (float)scene.height),
+                ImVec2(0, 1),
+                ImVec2(1, 0)
+        );
+        ImGui::End();
+
+        // Scene
+        glViewport(0, 0, scene.width, scene.height);
+        frameBuffer.bind();
+
+        glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        SceneObject* fox = scene.getSceneObject(0);
+        ShaderProgram& foxShader = fox->getShader();
+        scene.update(deltaTime, true);
+        foxShader.setUniform("depthMap", depthBuffer.depthID, 1);
+        foxShader.setUniform("lightSpaceMatrix", glm::value_ptr(lightSpaceMatrix));
+        foxShader.setUniform("viewPos", glm::value_ptr(scene.camera.position), 3);
+        foxShader.setUniform("lightPos", glm::value_ptr(glm::vec3(-3.0f, 4.0f, -1.0f)), 3);
         scene.draw();
 
         frameBuffer.unbind();
 
-        ImGui::Begin("scene");
+        ImGui::Begin("Scene");
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         scene.hasFocus = ImGui::IsWindowFocused();
-        ImVec2 pos = ImGui::GetCursorScreenPos();
+        ImVec2 pos1 = ImGui::GetCursorScreenPos();
         ImGui::GetWindowDrawList()->AddImage(
             (void*)frameBuffer.textureID,
-            pos,
-            ImVec2(pos.x + (float)scene.width, pos.y + (float)scene.height),
+            pos1,
+            ImVec2(pos1.x + (float)scene.width, pos1.y + (float)scene.height),
             ImVec2(0, 1),
             ImVec2(1, 0)
         );

@@ -24,7 +24,7 @@ public:
     ), gridUniformProvider(camera, gridShader) {}
 
     void draw(Camera& camera) {
-        gridUniformProvider.update();
+        gridUniformProvider.updateShader();
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
 };

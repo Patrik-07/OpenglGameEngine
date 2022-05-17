@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Opengl/Uniform/UniformProvider.h"
+#include "../opengl/uniform/UniformProvider.h"
 
 enum Direction {
     FORTH, BACK, RIGHT, LEFT
@@ -66,8 +66,7 @@ public:
         aspect = a;
     }
 
-    void update() override {
-        UniformProvider::update();
+    void update() {
         updateMatrices();
     }
 

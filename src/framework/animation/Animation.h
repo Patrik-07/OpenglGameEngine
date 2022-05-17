@@ -40,9 +40,9 @@ public:
         Assimp::Importer importer;
         const aiScene* scene = importer.ReadFile(animationPath, aiProcess_Triangulate);
 
-        aiAnimation* animation = scene->mAnimations[1];
+        aiAnimation* animation = scene->mAnimations[0];
         duration = animation->mDuration;
-        ticks = animation->mTicksPerSecond * 1.5f;
+        ticks = animation->mTicksPerSecond;
 
         readHierarchyData(root, scene->mRootNode);
         processBones(animation, *model);

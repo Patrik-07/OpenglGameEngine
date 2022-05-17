@@ -1,6 +1,5 @@
 #include "framework/Framework.h"
 #include "framework/animation/Animation.h"
-#include "framework/animation/Animator.h"
 
 int main(int argc, char** argv) {
     SDL_Window* window;
@@ -12,33 +11,34 @@ int main(int argc, char** argv) {
         RESOURCE::SHADER::DEFAULT_FS
     );
 
-    /*
-        modelLoader modelLoader = AssimpLoader()
-        AnimatedModel m;
-        modelLoader.loadAnimated(RESOURCE::MODEL::FOX);
-    */
-
-    // Load models
-    // change this to: modelLoader.load()
     AssimpLoader modelLoader = AssimpLoader();
-    Model model = modelLoader.load(RESOURCE::MODEL::FOX);
 
-    Animation animation(RESOURCE::MODEL::FOX, &model);
+    // Plane
+    Model planeModel = modelLoader.load(RESOURCE::MODEL::PLANE);
+    SceneObject plane(planeModel, shaderProgram);
+    plane.translate(glm::vec3(0.0f, -0.025f, 0.0f));
+    plane.scale(glm::vec3(15.0f, 15.0f, 15.0f));
 
-    Animator animator(animation);
+    // Fox
+    Model foxModel = modelLoader.load(RESOURCE::MODEL::FOX);
+    Animation animation(RESOURCE::MODEL::FOX, &foxModel);
+    SceneObject fox(foxModel, shaderProgram);
+    fox.translate(glm::vec3(0.0f, 0.825f, 0.0f));
+    fox.scale(glm::vec3(0.025f, 0.025f, 0.025f));
+    fox.setCurrentAnimation(animation);
 
-    SceneObject object(model, shaderProgram);
-    object.scale(glm::vec3(0.05f, 0.05f, 0.05f));
-
-    // Create camera
+    // Camera
     Camera camera(shaderProgram);
 
     // Init scene
     Scene scene(width, height, camera);
-    scene.addSceneObject(object);
+    scene.addSceneObject(fox);
+    scene.addSceneObject(plane);
 
     Timer timer;
     CameraHandler cameraHandler(camera);
+    float positions[3] = { 0.0f,  0.825f, 0.0f };
+    float tempPos[3] = {0.0f};
 
     bool isRunning = true;
     while (isRunning) {
@@ -66,8 +66,7 @@ int main(int argc, char** argv) {
         // add ImGui commands here
         // ...
 
-        animator.updateAnimation(deltaTime);
-        imGuiRenderer.sceneRender(scene, animator, shaderProgram);
+        imGuiRenderer.sceneRender(scene, deltaTime);
         imGuiRenderer.postRender();
 
         SDL_GL_SwapWindow(window);

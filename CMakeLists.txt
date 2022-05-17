@@ -99,6 +99,6 @@ add_executable(Imgui
         src/framework/opengl/buffer/FramerBuffer.h
         src/framework/utility/Window.h
         src/framework/model/VertexBoneData.h
-        src/framework/animation/Bone.h src/framework/animation/AssimpGLMHelpers.h src/framework/animation/Animation.h src/framework/animation/Animator.h src/framework/animation/Keyframe.h src/framework/model/animatedModel/Skeleton.h src/framework/animation/Pose.h src/framework/animation/AnimationContainer.h src/framework/anim/Bone2.h src/framework/anim/Keyframe.h src/framework/anim/KeyValue.h src/framework/model/animatedModel/AnimatedModel.h src/framework/anim/VertexData.h src/framework/animation/Timeline.h)
+        src/framework/animation/Bone.h src/framework/animation/AssimpGLMHelpers.h src/framework/animation/Animation.h src/framework/animation/Animator.h src/framework/animation/Keyframe.h src/framework/model/animatedModel/Skeleton.h src/framework/animation/Pose.h src/framework/animation/AnimationContainer.h src/framework/anim/Bone2.h src/framework/anim/Keyframe.h src/framework/anim/KeyValue.h src/framework/model/animatedModel/AnimatedModel.h src/framework/anim/VertexData.h src/framework/animation/Timeline.h src/framework/opengl/buffer/DepthBuffer.h)
 
 target_link_libraries(Imgui mingw32 opengl32 glew32 SDL2main SDL2 assimp)

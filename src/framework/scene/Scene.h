@@ -25,8 +25,14 @@ public:
         objects.push_back(&sceneObject);
     }
 
+    SceneObject* getSceneObject(int idx) {
+        return objects[idx];
+    }
+
     void draw() {
+        camera.updateShader();
         for (SceneObject* object : objects) {
+            object->updateShader();
             object->draw();
         }
         grid.draw(camera);
@@ -37,11 +43,13 @@ public:
         camera.setAspectRatio(w / h);
     }
 
-    void update() {
+
+    void update(float deltaTime, bool updateCamera) {
+        if (updateCamera)
+            camera.update();
         for (SceneObject* object : objects) {
-            object->update();
+            object->update(deltaTime);
         }
-        camera.update();
     }
 
     Camera& camera;

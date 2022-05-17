@@ -15,7 +15,7 @@ class UniformProvider {
 public:
     UniformProvider(const std::string& structName, ShaderProgram& shaderProgram) : structName(structName), shaderProgram(shaderProgram) {}
 
-    virtual void update() {
+    virtual void updateShader() {
         int count = 0;
         glGetProgramiv(shaderProgram.ID, GL_ACTIVE_UNIFORMS, &count);
 

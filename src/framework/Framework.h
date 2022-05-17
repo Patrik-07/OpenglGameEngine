@@ -1,6 +1,6 @@
 #pragma once
 
-static int width = 1920;
+static int width = 1800;
 static int height = 900;
 
 #include "imgui/imgui.h"
