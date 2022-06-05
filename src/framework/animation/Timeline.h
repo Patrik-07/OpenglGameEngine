@@ -28,7 +28,6 @@ protected:
     }
 };
 
-
 class PositionTimeline : public Timeline<PositionKeyframe> {
 public:
     glm::mat4 interpolate(float animationTime) override {

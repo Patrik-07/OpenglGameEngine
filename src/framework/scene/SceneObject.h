@@ -12,7 +12,7 @@ class SceneObject : public UniformProvider {
 
     glm::mat4 modelMatrix;
 
-    // TODO make these properties
+//    TODO make these properties
 //    glm::mat3 position;
 //    glm::mat3 rotation;
 //    glm::mat3 scale;

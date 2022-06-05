@@ -29,11 +29,6 @@ float ShadowCalculation(vec4 fragPosLightSpace, float bias) {
 
     float shadow = currentDepth - bias > closestDepth ? 0.75f : 0.0f;
 
-//    float visibility = 1.0f;
-//    if (texture(depthMap, fragmentShaderIn.shadowCoord.xy).z  <  fragmentShaderIn.shadowCoord.z - bias) {
-//        visibility = 0.5f;
-//    }
-
     if(projCoords.z > 1.0f)
         shadow = 0.0f;
 

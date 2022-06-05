@@ -68,9 +68,9 @@ public:
         float near_plane = 1.0f, far_plane = 7.5f;
         glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
         glm::mat4 lightView = glm::lookAt(
-                glm::vec3(-3.0f, 4.0f, -1.0f),
-                glm::vec3(3.0f, 0.0f, 0.0f),
-                glm::vec3(0.0f, 1.0f, 0.0f)
+            glm::vec3(-3.0f, 4.0f, -1.0f),
+            glm::vec3(3.0f, 0.0f, 0.0f),
+            glm::vec3(0.0f, 1.0f, 0.0f)
         );
         glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
@@ -94,11 +94,11 @@ public:
         ImGui::Begin("Depth");
         ImVec2 pos2 = ImGui::GetCursorScreenPos();
         ImGui::GetWindowDrawList()->AddImage(
-                (void*)depthBuffer.depthID,
-                pos2,
-                ImVec2(pos2.x + (float)scene.width/2, pos2.y + (float)scene.height/2),
-                ImVec2(0, 1),
-                ImVec2(1, 0)
+            (void*)depthBuffer.depthID,
+            pos2,
+            ImVec2(pos2.x + (float)scene.width/2, pos2.y + (float)scene.height/2),
+            ImVec2(0, 1),
+            ImVec2(1, 0)
         );
         ImGui::End();
 
@@ -152,11 +152,11 @@ public:
         ImGui::Begin("Normal");
         ImVec2 pos3 = ImGui::GetCursorScreenPos();
         ImGui::GetWindowDrawList()->AddImage(
-                (void*)normalBuffer.textureID,
-                pos3,
-                ImVec2(pos3.x + (float)scene.width, pos3.y + (float)scene.height),
-                ImVec2(0, 1),
-                ImVec2(1, 0)
+            (void*)normalBuffer.textureID,
+            pos3,
+            ImVec2(pos3.x + (float)scene.width, pos3.y + (float)scene.height),
+            ImVec2(0, 1),
+            ImVec2(1, 0)
         );
         ImGui::End();
 
@@ -178,11 +178,11 @@ public:
         ImGui::Begin("Solid");
         ImVec2 pos4 = ImGui::GetCursorScreenPos();
         ImGui::GetWindowDrawList()->AddImage(
-                (void*)solidBuffer.textureID,
-                pos4,
-                ImVec2(pos4.x + (float)scene.width, pos4.y + (float)scene.height),
-                ImVec2(0, 1),
-                ImVec2(1, 0)
+            (void*)solidBuffer.textureID,
+            pos4,
+            ImVec2(pos4.x + (float)scene.width, pos4.y + (float)scene.height),
+            ImVec2(0, 1),
+            ImVec2(1, 0)
         );
         ImGui::End();
     }

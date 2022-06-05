@@ -2,8 +2,8 @@
 
 namespace RESOURCE {
     namespace SHADER {
-        const char* DEFAULT_VS = R"(shaders\vertexShader.glsl)";
-        const char* DEFAULT_FS = R"(shaders\fragmentShader.glsl)";
+        const char* DEFAULT_VS = R"(shaders\defaultVertexShader.glsl)";
+        const char* DEFAULT_FS = R"(shaders\defaultFragmentShader.glsl)";
 
         const char* GRID_VS = R"(shaders\gridVertexShader.glsl)";
         const char* GRID_FS = R"(shaders\gridFragmentShader.glsl)";
