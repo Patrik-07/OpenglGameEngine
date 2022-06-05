@@ -6,3 +6,6 @@ This is my thesis project. Here, you can see an example image of the working eng
 
 ## Descripton
 This is a 3D computer game engine, based on the OpenGL graphics library writing in C++.
+
+## Technologies I used
+ - SDL2
