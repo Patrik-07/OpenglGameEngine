@@ -10,9 +10,6 @@ This is a 3D computer game engine, based on the OpenGL graphics library writing 
 ## Built with
 * [OpenGL](https://www.opengl.org/) - graphics API
 * [SDL2](https://www.libsdl.org/) - window management
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [ImGui](https://github.com/ocornut/imgui) - user interface
+* [GLM](https://github.com/g-truc/glm) - mathematics library
+* [Assimp](https://github.com/assimp/assimp) - 3D model loading library
