@@ -1,3 +1,0 @@
-C:/Users/PatrikSanta/Prog/C++/Imgui/cmake-build-release/CMakeFiles/Imgui.dir
-C:/Users/PatrikSanta/Prog/C++/Imgui/cmake-build-release/CMakeFiles/edit_cache.dir
-C:/Users/PatrikSanta/Prog/C++/Imgui/cmake-build-release/CMakeFiles/rebuild_cache.dir
