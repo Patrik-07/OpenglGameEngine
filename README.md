@@ -9,7 +9,7 @@ This is a 3D computer game engine, based on the OpenGL graphics library writing 
 
 ## Built with
 * [OpenGL](https://www.opengl.org/) - graphics API
-* [SDL2](https://www.libsdl.org/) - the window management
+* [SDL2](https://www.libsdl.org/) - window management
 * [Vue.js](https://vuejs.org/)
 * [Angular](https://angular.io/)
 * [Svelte](https://svelte.dev/)
